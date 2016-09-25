@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
 
+import sb.classificacoes.tipoOperacao;
+import sb.view.Teclado;
 import sb.model.Conta;
 
 import java.awt.event.ActionListener;
@@ -29,7 +31,8 @@ public class TelaSaque extends PadraoCliente {
 		super(conta);
 		setTitle("Saque");
 		setResizable(false);
-		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
+		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane()
+				.getLayout();
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 0.0 };
 
@@ -44,16 +47,19 @@ public class TelaSaque extends PadraoCliente {
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 253, -19, 239, 0, 82, 0 };
 		gbl_panel.rowHeights = new int[] { 63, 63, 6, 48, 0 };
-		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0,
+				Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
 		JButton btnValor = new JButton("R$ 50,00");
 		btnValor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Teclado senhaConfirme = new Teclado(conta, new BigDecimal(50.00));
-				senhaConfirme.setVisible(true);
+				Teclado teclado = new Teclado(conta, new BigDecimal(50.00),
+						null, tipoOperacao.SAQUE, null);
+				teclado.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnCinquenta = new GridBagConstraints();
@@ -67,11 +73,12 @@ public class TelaSaque extends PadraoCliente {
 		btnCem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Teclado senhaConfirme = new Teclado(conta, new BigDecimal(100.00));
-				senhaConfirme.setVisible(true);
+				Teclado teclado = new Teclado(conta, new BigDecimal(100.00),
+						null, tipoOperacao.SAQUE, null);
+				teclado.setVisible(true);
 			}
 		});
-		
+
 		GridBagConstraints gbc_btnCem = new GridBagConstraints();
 		gbc_btnCem.fill = GridBagConstraints.BOTH;
 		gbc_btnCem.insets = new Insets(0, 0, 5, 5);
@@ -83,8 +90,9 @@ public class TelaSaque extends PadraoCliente {
 		btnDuzentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Teclado senhaConfirme = new Teclado(conta, new BigDecimal(200.00));
-				senhaConfirme.setVisible(true);
+				Teclado teclado = new Teclado(conta, new BigDecimal(200.00),
+						null, tipoOperacao.SAQUE, null);
+				teclado.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnDuzentos = new GridBagConstraints();
@@ -98,8 +106,9 @@ public class TelaSaque extends PadraoCliente {
 		btnTrezentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Teclado senhaConfirme = new Teclado(conta, new BigDecimal(300.00));
-				senhaConfirme.setVisible(true);
+				Teclado teclado = new Teclado(conta, new BigDecimal(300.00),
+						null, tipoOperacao.SAQUE, null);
+				teclado.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnTrezentos = new GridBagConstraints();
@@ -113,8 +122,9 @@ public class TelaSaque extends PadraoCliente {
 		btnQuinhentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Teclado senhaConfirme = new Teclado(conta, new BigDecimal(100.00));
-				senhaConfirme.setVisible(true);
+				Teclado teclado = new Teclado(conta, new BigDecimal(500.00),
+						null, tipoOperacao.SAQUE, null);
+				teclado.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnQuinhentos = new GridBagConstraints();
@@ -139,7 +149,8 @@ public class TelaSaque extends PadraoCliente {
 		formatter.setFormat(dFormat);
 		formatter.setAllowsInvalid(false);
 		txtValor = new JFormattedTextField();
-		((JFormattedTextField) txtValor).setFormatterFactory(new DefaultFormatterFactory(formatter));
+		((JFormattedTextField) txtValor)
+				.setFormatterFactory(new DefaultFormatterFactory(formatter));
 		txtValor.setText(new DecimalFormat("R$ #,##0.00").format(0.00));
 		GridBagConstraints gbc_txtValor = new GridBagConstraints();
 		gbc_txtValor.fill = GridBagConstraints.BOTH;
@@ -148,28 +159,29 @@ public class TelaSaque extends PadraoCliente {
 		gbc_txtValor.gridy = 3;
 		panel.add(txtValor, gbc_txtValor);
 		txtValor.setColumns(10);
-						
-								JButton btnSacar = new JButton("Sacar");
-								btnSacar.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
-										
-										if (txtValor.getText().equals("0.00")) {
-											JOptionPane.showMessageDialog(TelaSaque.this, "Informe um valor para reaizar o saque!!!", "Atenção",
-													JOptionPane.WARNING_MESSAGE);
-										} else {
 
-											new Teclado(conta, new BigDecimal(txtValor.getText()));
-										}
+		JButton btnSaque = new JButton("Sacar");
+		btnSaque.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-									}
-								});
-								GridBagConstraints gbc_btnSacar = new GridBagConstraints();
-								gbc_btnSacar.gridwidth = 2;
-								gbc_btnSacar.insets = new Insets(0, 0, 0, 5);
-								gbc_btnSacar.fill = GridBagConstraints.BOTH;
-								gbc_btnSacar.gridx = 3;
-								gbc_btnSacar.gridy = 3;
-								panel.add(btnSacar, gbc_btnSacar);
+				if (txtValor.getText().equals("0.00")) {
+					JOptionPane.showMessageDialog(TelaSaque.this,
+							"Ã‰ necessÃ¡rio informar um valor para sacar",
+							"Atencao", JOptionPane.WARNING_MESSAGE);
+				} else {
+					new Teclado(conta, new BigDecimal(txtValor.getText()
+							.replace(".", "").replace(",", ".").toString()),
+							null, tipoOperacao.SAQUE, null).setVisible(true);
+				}
+			}
+		});
+		GridBagConstraints gbc_btnSaque = new GridBagConstraints();
+		gbc_btnSaque.gridwidth = 2;
+		gbc_btnSaque.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSaque.fill = GridBagConstraints.BOTH;
+		gbc_btnSaque.gridx = 3;
+		gbc_btnSaque.gridy = 3;
+		panel.add(btnSaque, gbc_btnSaque);
 
 	}
 }

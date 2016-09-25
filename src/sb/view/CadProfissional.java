@@ -30,7 +30,7 @@ public class CadProfissional extends PadraoBancario implements WindowListener {
 	private JPanel contentPane;
 	private JTextField txtNome;
 	private JTextField txtIdade;
-	private JTextField txtSenhaOperacoes;
+	private JTextField txtOperaSenhas;
 	private JTextField txtUsuario;
 	private JTextField txtSenha;
 	private JComboBox cmbTipoProfissional;
@@ -122,14 +122,14 @@ public class CadProfissional extends PadraoBancario implements WindowListener {
 		}
 
 		try {
-			txtSenhaOperacoes = new JFormattedTextField(new MaskFormatter("########"));
+			txtOperaSenhas = new JFormattedTextField(new MaskFormatter("########"));
 			GridBagConstraints gbc_txtSenhaOperacoes = new GridBagConstraints();
 			gbc_txtSenhaOperacoes.fill = GridBagConstraints.HORIZONTAL;
 			gbc_txtSenhaOperacoes.insets = new Insets(0, 0, 5, 5);
 			gbc_txtSenhaOperacoes.gridx = 2;
 			gbc_txtSenhaOperacoes.gridy = 4;
-			panel.add(txtSenhaOperacoes, gbc_txtSenhaOperacoes);
-			txtSenhaOperacoes.setColumns(10);
+			panel.add(txtOperaSenhas, gbc_txtSenhaOperacoes);
+			txtOperaSenhas.setColumns(10);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
@@ -183,10 +183,10 @@ public class CadProfissional extends PadraoBancario implements WindowListener {
 			public void actionPerformed(ActionEvent e) {
 
 				if (txtNome.getText().equals("") || txtIdade.getText().equals("") || txtSenha.getText().equals("")
-						|| txtSenhaOperacoes.getText().equals("") || txtUsuario.getText().equals("")) {
+						|| txtOperaSenhas.getText().equals("") || txtUsuario.getText().equals("")) {
 
 					JOptionPane.showMessageDialog(CadProfissional.this, "Preencha corretamente todos os campos!",
-							"Atenção", JOptionPane.WARNING_MESSAGE, null);
+							"Atenï¿½ï¿½o", JOptionPane.WARNING_MESSAGE, null);
 					txtNome.requestFocus();
 				} else {
 
@@ -195,7 +195,7 @@ public class CadProfissional extends PadraoBancario implements WindowListener {
 					profissional.setIdade(Integer.parseInt(txtIdade.getText()));
 					profissional.setNome(txtNome.getText().trim());
 					profissional.setSenhaAcesso(txtSenha.getText());
-					profissional.setSenhaOperacoes(txtSenhaOperacoes.getText());
+					profissional.setSenhaOperacoes(txtOperaSenhas.getText());
 					profissional.setUserName(txtUsuario.getText());
 					profissional.setTipoProfissional((ClassificacaoUsuario) cmbTipoProfissional.getSelectedItem());
 
@@ -225,7 +225,7 @@ public class CadProfissional extends PadraoBancario implements WindowListener {
 		txtIdade.setText("");
 		txtNome.setText("");
 		txtSenha.setText("");
-		txtSenhaOperacoes.setText("");
+		txtOperaSenhas.setText("");
 		txtUsuario.setText("");
 		cmbTipoProfissional.setSelectedItem(0);
 	}
@@ -286,7 +286,7 @@ public class CadProfissional extends PadraoBancario implements WindowListener {
 			txtIdade.setText("");
 			txtNome.setText("");
 			txtSenha.setText("");
-			txtSenhaOperacoes.setText("");
+			txtOperaSenhas.setText("");
 			txtUsuario.setText("");
 
 		} else {
@@ -294,7 +294,7 @@ public class CadProfissional extends PadraoBancario implements WindowListener {
 			txtIdade.setText(profissional.getIdade().toString());
 			txtNome.setText(profissional.getNome());
 			txtSenha.setText(profissional.getSenhaAcesso());
-			txtSenhaOperacoes.setText(profissional.getSenhaOperacoes());
+			txtOperaSenhas.setText(profissional.getSenhaOperacoes());
 			txtUsuario.setText(profissional.getUserName());
 			cmbTipoProfissional.setSelectedItem(profissional.getTipoProfissional().getOrdinal());
 

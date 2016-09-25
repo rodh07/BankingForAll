@@ -10,20 +10,22 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import sb.controller.ContaController;
+import sb.view.TelaCliente;
 import sb.model.Conta;
 
 
 public class TelaCliente extends PadraoCliente {
 
-	static final String CONTA_ELETRONICA = "Conta Eletrônica";
-	static final String CONTA_POUPANCA = "Conta Poupança";
+	static final String CONTA_ELETRONICA = "Conta Eletrï¿½nica";
+	static final String CONTA_POUPANCA = "Conta Poupanï¿½a";
 	static final String CONTA_CORRENTE = "Conta Corrente";
 	private JPanel contentPane;
 	private JButton btnSaque;
 	private JButton btnTransferncia;
 	private JButton btnSaldo;
 	private JButton btnPagamentos;
-	private JButton btnDepsito;
+	private JButton btnDeposito;
 	private JButton btnFinaliza;
 
 	public TelaCliente(final Conta conta) {
@@ -31,7 +33,7 @@ public class TelaCliente extends PadraoCliente {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setTitle("Área do Cliente");
+		setTitle("Sistema Banking For All");
 		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 1.0 };
@@ -91,8 +93,8 @@ public class TelaCliente extends PadraoCliente {
 		gbc_btnPagamentos.gridy = 1;
 		panel.add(btnPagamentos, gbc_btnPagamentos);
 
-		btnDepsito = new JButton("3- Dep\u00F3sito");
-		btnDepsito.addActionListener(new ActionListener() {
+		btnDeposito = new JButton("3- Dep\u00F3sito");
+		btnDeposito.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				new TelaDeposito(conta).setVisible(true);
@@ -105,23 +107,33 @@ public class TelaCliente extends PadraoCliente {
 		gbc_btnDepsito.insets = new Insets(0, 0, 0, 5);
 		gbc_btnDepsito.gridx = 0;
 		gbc_btnDepsito.gridy = 2;
-		panel.add(btnDepsito, gbc_btnDepsito);
+		panel.add(btnDeposito, gbc_btnDepsito);
 
 		btnFinaliza = new JButton("6- Finalizar");
+		btnFinaliza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Integer decisao = JOptionPane.showConfirmDialog(TelaCliente.this, "Deseja finalizar esta conta?", "", JOptionPane.YES_NO_OPTION);
+
+				if (decisao.equals(0)) {
+					new sb.controller.ContaController().finalizarConta(conta);
+				}
+			}
+		});
 		GridBagConstraints gbc_btnFinaliza = new GridBagConstraints();
 		gbc_btnFinaliza.fill = GridBagConstraints.BOTH;
 		gbc_btnFinaliza.gridx = 2;
 		gbc_btnFinaliza.gridy = 2;
 		panel.add(btnFinaliza, gbc_btnFinaliza);
 
-		validaOperacoesDisponiveis(conta);
+		validaTipoOperacao(conta);
 
 	}
 
-	private void validaOperacoesDisponiveis(final Conta conta) {
+	private void validaTipoOperacao(final Conta conta) {
 
 		if (conta.getId() == null) {
-			JOptionPane.showMessageDialog(TelaCliente.this, "Usuário sem conta cadastrada. Verifique!", "Atenção",
+			JOptionPane.showMessageDialog(TelaCliente.this, "Usuï¿½rio sem conta cadastrada. Verifique!", "Atenï¿½ï¿½o",
 					JOptionPane.ERROR_MESSAGE);
 
 		} else {
@@ -132,7 +144,7 @@ public class TelaCliente extends PadraoCliente {
 				break;
 			case CONTA_ELETRONICA:
 				btnSaque.setEnabled(false);
-				btnDepsito.setEnabled(false);
+				btnDeposito.setEnabled(false);
 				break;
 			default:
 				break;

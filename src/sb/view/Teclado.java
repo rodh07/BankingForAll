@@ -13,7 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import sb.classificacoes.tipoOperacao;
 import sb.model.Conta;
+
 import java.awt.Font;
 
 
@@ -22,7 +24,7 @@ public class Teclado extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtSenha;
 
-	public Teclado(Conta conta, BigDecimal valorSaque) {
+	public Teclado(Conta conta, BigDecimal valor, Conta contaTransferir, tipoOperacao operacao, String codBarras) {
 		setSize(176, 238);
 		setTitle("Senha");
 		setLocationRelativeTo(null);
@@ -166,4 +168,5 @@ public class Teclado extends JFrame {
 
 	}
 
+	
 }

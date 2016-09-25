@@ -176,6 +176,7 @@ public abstract class PadraoCliente extends JFrame {
 		lblTipoConta = new JLabel("");
 		lblTipoConta.setForeground(Color.BLACK);
 		GridBagConstraints gbc_lblTipoConta = new GridBagConstraints();
+		gbc_lblTipoConta.gridwidth = 2;
 		gbc_lblTipoConta.anchor = GridBagConstraints.EAST;
 		gbc_lblTipoConta.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTipoConta.gridx = 0;
@@ -217,7 +218,7 @@ public abstract class PadraoCliente extends JFrame {
 		gbc_lblSaldo.gridy = 2;
 		panel.add(lblSaldo, gbc_lblSaldo);
 
-		//populaTelaInfConta(conta);
+		// populaTelaInfConta(conta);
 
 	}
 
