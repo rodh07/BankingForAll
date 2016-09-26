@@ -23,7 +23,7 @@ import sb.controller.ContaController;
 import sb.model.Conta;
 
 
-public class CadConta extends PadraoBancario {
+public class CadastroConta extends CabecalhoBancario {
 
 	private JPanel contentPane;
 	private JTextField txtNome;
@@ -34,7 +34,7 @@ public class CadConta extends PadraoBancario {
 	private JTextField txtSenhaOpera;
 	private JTextField txtUsuario;
 
-	public CadConta() {
+	public CadastroConta() {
 		super();
 		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
@@ -192,7 +192,7 @@ public class CadConta extends PadraoBancario {
 		panel.add(txtSenhaAcesso, gbc_txtSenhaAcesso);
 		txtSenhaAcesso.setColumns(10);
 
-		JLabel lblNewLabel = new JLabel("Senha Operações");
+		JLabel lblNewLabel = new JLabel("Senha Operaï¿½ï¿½es");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -223,7 +223,7 @@ public class CadConta extends PadraoBancario {
 						|| txtUsuario.getText().equals("") || txtSenhaAcesso.getText().equals("")
 						|| txtSenhaOpera.getText().equals("")) {
 
-					JOptionPane.showMessageDialog(null, "Informe todos os campos!!!", "Atenção",
+					JOptionPane.showMessageDialog(null, "Informe todos os campos!!!", "Atenï¿½ï¿½o",
 							JOptionPane.ERROR_MESSAGE, null);
 					txtNome.requestFocus();
 				} else {

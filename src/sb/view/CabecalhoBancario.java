@@ -23,7 +23,7 @@ import javax.swing.JButton;
 
 import java.awt.Color;
 
-public class PadraoBancario extends JFrame {
+public class CabecalhoBancario extends JFrame {
 
 	/**
 	 * 
@@ -40,7 +40,7 @@ public class PadraoBancario extends JFrame {
 		this.lblDataHoraAtual.setText(lblDataAcess);
 	}
 
-	public PadraoBancario() {
+	public CabecalhoBancario() {
 		setSize(553, 310);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./Icones/Play256x256.png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -14,7 +14,7 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class OperacaoConfirmada extends PadraoCliente {
+public class OperacaoConfirmada extends CabecalhoCliente {
 
 	public OperacaoConfirmada(final Conta conta) {
 		super(conta);
@@ -22,7 +22,7 @@ public class OperacaoConfirmada extends PadraoCliente {
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TelaCliente telaCliente = new TelaCliente(conta);
+				MainCliente telaCliente = new MainCliente(conta);
 				telaCliente.setVisible(true);
 				telaCliente.dispose();
 				telaCliente.setLocationRelativeTo(null);

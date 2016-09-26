@@ -21,14 +21,14 @@ import sb.model.ListaProfissionalModel;
 import sb.model.Profissional;
 
 
-public class ListaProfissionais extends PadraoBancario implements WindowListener {
+public class ListarProfissionais extends CabecalhoBancario implements WindowListener {
 
 	private JPanel contentPane;
 	private JTable tblProfissionais;
 	private List<Profissional> profissionais;
 	private ListaProfissionalModel model;
 
-	public ListaProfissionais() {
+	public ListarProfissionais() {
 		super();
 		setTitle("Listagem de Profissionais");
 		addWindowListener(this);
@@ -61,12 +61,12 @@ public class ListaProfissionais extends PadraoBancario implements WindowListener
 				final Integer rowSelected = tblProfissionais.getSelectedRow();
 
 				if (rowSelected < 0) {
-					JOptionPane.showMessageDialog(ListaProfissionais.this, "Selecione um profissional para editar!",
-							"Atenção", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(ListarProfissionais.this, "Selecione um profissional para editar!",
+							"Atenï¿½ï¿½o", JOptionPane.WARNING_MESSAGE);
 				} else {
 					final Integer rowIndex = tblProfissionais.convertRowIndexToModel(rowSelected);
 					final Integer idProfissinal = (Integer) tblProfissionais.getModel().getValueAt(rowIndex, -1);
-					new CadProfissional(idProfissinal).setVisible(true);
+					new CadastroProfissional(idProfissinal).setVisible(true);
 				}
 
 			}
@@ -81,7 +81,7 @@ public class ListaProfissionais extends PadraoBancario implements WindowListener
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				new CadProfissional(null).setVisible(true);
+				new CadastroProfissional(null).setVisible(true);
 
 			}
 		});

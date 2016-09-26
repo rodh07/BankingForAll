@@ -20,14 +20,14 @@ import sb.model.ListaClienteModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ListaCliente extends PadraoBancario implements WindowListener {
+public class ListarCliente extends CabecalhoBancario implements WindowListener {
 
 	private JPanel contentPane;
 	private JTable tblContas;
 	private List<Conta> contas;
 	private ListaClienteModel model;
 
-	public ListaCliente() {
+	public ListarCliente() {
 		super();
 		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
 		gridBagLayout.rowHeights = new int[] { 0, 0 };

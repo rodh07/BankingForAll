@@ -25,8 +25,8 @@ import sb.controller.ContaController;
 import sb.controller.UsuarioController;
 import sb.classificacoes.ClassificacaoUsuario;
 import sb.model.Conta;
-import sb.view.TelaBancario;
-import sb.view.TelaCliente;
+import sb.view.MainBancario;
+import sb.view.MainCliente;
 
 public class Logar extends JFrame {
 
@@ -154,14 +154,14 @@ public class Logar extends JFrame {
 
 		if (acessa && tipoUsuario == ClassificacaoUsuario.BANCARIO) {
 
-			TelaBancario telaBanc = new TelaBancario();
+			MainBancario telaBanc = new MainBancario();
 			telaBanc.setVisible(true);
 			setVisible(false);
 
 		} else if (acessa && tipoUsuario == ClassificacaoUsuario.CLIENTE) {
 			Conta conta = new ContaController().get(usuario, senha);
 			// Conta conta = new Conta();
-			TelaCliente telaCliente = new TelaCliente(conta);
+			MainCliente telaCliente = new MainCliente(conta);
 			JOptionPane.showMessageDialog(Logar.this, "Bem vindo ao sistema do Banking For All!!!");
 			telaCliente.setVisible(true);
 			setVisible(false);

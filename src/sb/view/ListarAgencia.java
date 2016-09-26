@@ -22,17 +22,17 @@ import sb.model.Agencia;
 import sb.model.ListaAgenciaModel;
 
 
-public class ListaAgencia extends PadraoBancario implements WindowListener {
+public class ListarAgencia extends CabecalhoBancario implements WindowListener {
 
 	private JPanel contentPane;
 	private JTable tblAgencia;
 	private ListaAgenciaModel model;
 	private List<Agencia> agencias;
 
-	public ListaAgencia() {
+	public ListarAgencia() {
 		super();
 		addWindowListener(this);
-		setTitle("Listagem de Agências");
+		setTitle("Listagem de Agï¿½ncias");
 		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
 		gridBagLayout.columnWidths = new int[] { 372, 73, 77 };
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
@@ -61,12 +61,12 @@ public class ListaAgencia extends PadraoBancario implements WindowListener {
 				final Integer rowSelected = tblAgencia.getSelectedRow();
 				
 				if (rowSelected <= 0) {
-					JOptionPane.showMessageDialog(ListaAgencia.this, "Selecione uma agência para editar.", "Atenção",
+					JOptionPane.showMessageDialog(ListarAgencia.this, "Selecione uma agï¿½ncia para editar.", "Atenï¿½ï¿½o",
 							JOptionPane.WARNING_MESSAGE);
 				} else {
 					final Integer rowIndex = tblAgencia.convertRowIndexToModel(rowSelected);
 					final Integer idAgencia = (Integer) tblAgencia.getModel().getValueAt(rowIndex, -1);
-					new CadAgencia(idAgencia).setVisible(true);
+					new CadastroAgencia(idAgencia).setVisible(true);
 				}
 			}
 		});
@@ -81,7 +81,7 @@ public class ListaAgencia extends PadraoBancario implements WindowListener {
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				new CadAgencia(null).setVisible(true);
+				new CadastroAgencia(null).setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnAdicionar = new GridBagConstraints();
@@ -135,7 +135,7 @@ public class ListaAgencia extends PadraoBancario implements WindowListener {
 	@Override
 	public void windowOpened(WindowEvent e) {
 		/**
-		 * Método responsável por setar o modelo a tabela e setar os valores
+		 * Mï¿½todo responsï¿½vel por setar o modelo a tabela e setar os valores
 		 */
 		preencheTela();
 	}

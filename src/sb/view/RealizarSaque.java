@@ -22,12 +22,12 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 
-public class TelaSaque extends PadraoCliente {
+public class RealizarSaque extends CabecalhoCliente {
 
 	private JPanel contentPane;
 	private JTextField txtValor;
 
-	public TelaSaque(final Conta conta) {
+	public RealizarSaque(final Conta conta) {
 		super(conta);
 		setTitle("Saque");
 		setResizable(false);
@@ -165,7 +165,7 @@ public class TelaSaque extends PadraoCliente {
 			public void actionPerformed(ActionEvent e) {
 
 				if (txtValor.getText().equals("0.00")) {
-					JOptionPane.showMessageDialog(TelaSaque.this,
+					JOptionPane.showMessageDialog(RealizarSaque.this,
 							"É necessário informar um valor para sacar",
 							"Atencao", JOptionPane.WARNING_MESSAGE);
 				} else {

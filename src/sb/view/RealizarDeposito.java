@@ -24,7 +24,7 @@ import sb.controller.ContaController;
 import sb.model.Conta;
 
 
-public class TelaDeposito extends PadraoCliente {
+public class RealizarDeposito extends CabecalhoCliente {
 
 	private JPanel contentPane;
 	private JTextField txtAgencia;
@@ -35,13 +35,13 @@ public class TelaDeposito extends PadraoCliente {
 	private Conta conta;
 	private JComboBox cmbTipoConta;
 
-	public TelaDeposito(final Conta conta) {
+	public RealizarDeposito(final Conta conta) {
 		super(conta);
 		this.conta = conta;
 		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 0.0 };
-		setTitle("Depósito");
+		setTitle("Depï¿½sito");
 		setLocationRelativeTo(null);
 		setResizable(false);
 
@@ -185,8 +185,8 @@ public class TelaDeposito extends PadraoCliente {
 
 														if (txtAgencia.getText().equals("") || txtConta.getText().equals("") || txtTitular.getText().equals("")
 																|| txtValorDeposito.getText().equals("")) {
-															JOptionPane.showMessageDialog(null, "Existem campos vazios. Preencha todos para realizar ação!",
-																	"Atenção", JOptionPane.WARNING_MESSAGE);
+															JOptionPane.showMessageDialog(null, "Existem campos vazios. Preencha todos para realizar aï¿½ï¿½o!",
+																	"Atenï¿½ï¿½o", JOptionPane.WARNING_MESSAGE);
 														} else {
 
 															BigDecimal valorDeposito = new BigDecimal(txtValorDeposito.getText().replaceAll(",", "."));
@@ -256,11 +256,11 @@ public class TelaDeposito extends PadraoCliente {
 	private Object validaTipoConta(final String tipoConta) {
 
 		switch (tipoConta) {
-		case TelaCliente.CONTA_CORRENTE:
+		case MainCliente.CONTA_CORRENTE:
 			return TipoConta.CC;
-		case TelaCliente.CONTA_POUPANCA:
+		case MainCliente.CONTA_POUPANCA:
 			return TipoConta.CP;
-		case TelaCliente.CONTA_ELETRONICA:
+		case MainCliente.CONTA_ELETRONICA:
 			return TipoConta.CE;
 		default:
 			break;

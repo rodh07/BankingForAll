@@ -11,11 +11,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import sb.controller.ContaController;
-import sb.view.TelaCliente;
+import sb.view.MainCliente;
 import sb.model.Conta;
 
 
-public class TelaCliente extends PadraoCliente {
+public class MainCliente extends CabecalhoCliente {
 
 	static final String CONTA_ELETRONICA = "Conta Eletr�nica";
 	static final String CONTA_POUPANCA = "Conta Poupan�a";
@@ -28,7 +28,7 @@ public class TelaCliente extends PadraoCliente {
 	private JButton btnDeposito;
 	private JButton btnFinaliza;
 
-	public TelaCliente(final Conta conta) {
+	public MainCliente(final Conta conta) {
 		super(conta);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -57,7 +57,7 @@ public class TelaCliente extends PadraoCliente {
 		btnSaque.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				TelaSaque telaSaque = new TelaSaque(conta);
+				RealizarSaque telaSaque = new RealizarSaque(conta);
 				telaSaque.setVisible(true);
 				telaSaque.setLocationRelativeTo(null);
 			}
@@ -97,7 +97,7 @@ public class TelaCliente extends PadraoCliente {
 		btnDeposito.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				new TelaDeposito(conta).setVisible(true);
+				new RealizarDeposito(conta).setVisible(true);
 
 			}
 		});
@@ -113,7 +113,7 @@ public class TelaCliente extends PadraoCliente {
 		btnFinaliza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				Integer decisao = JOptionPane.showConfirmDialog(TelaCliente.this, "Deseja finalizar esta conta?", "", JOptionPane.YES_NO_OPTION);
+				Integer decisao = JOptionPane.showConfirmDialog(MainCliente.this, "Deseja finalizar esta conta?", "", JOptionPane.YES_NO_OPTION);
 
 				if (decisao.equals(0)) {
 					new sb.controller.ContaController().finalizarConta(conta);
@@ -133,7 +133,7 @@ public class TelaCliente extends PadraoCliente {
 	private void validaTipoOperacao(final Conta conta) {
 
 		if (conta.getId() == null) {
-			JOptionPane.showMessageDialog(TelaCliente.this, "Usu�rio sem conta cadastrada. Verifique!", "Aten��o",
+			JOptionPane.showMessageDialog(MainCliente.this, "Usu�rio sem conta cadastrada. Verifique!", "Aten��o",
 					JOptionPane.ERROR_MESSAGE);
 
 		} else {

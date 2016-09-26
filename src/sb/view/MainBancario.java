@@ -9,16 +9,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class TelaBancario extends PadraoBancario {
+public class MainBancario extends CabecalhoBancario {
 
 	private JPanel contentPane;
 
-	public TelaBancario() {
+	public MainBancario() {
 		super();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setTitle("Área do Bancario");
+		setTitle("ï¿½rea do Bancario");
 		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0 };
@@ -66,7 +66,7 @@ public class TelaBancario extends PadraoBancario {
 		btnProfi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				ListaProfissionais listProfissionais = new ListaProfissionais();
+				ListarProfissionais listProfissionais = new ListarProfissionais();
 				listProfissionais.setVisible(true);
 
 			}
@@ -82,7 +82,7 @@ public class TelaBancario extends PadraoBancario {
 		btnNovaConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				new CadConta().setVisible(true);
+				new CadastroConta().setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnNovaConta = new GridBagConstraints();
@@ -104,7 +104,7 @@ public class TelaBancario extends PadraoBancario {
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				ListaCliente listaClientes = new ListaCliente();
+				ListarCliente listaClientes = new ListarCliente();
 				listaClientes.setVisible(true);
 			}
 		});
@@ -119,7 +119,7 @@ public class TelaBancario extends PadraoBancario {
 		btnAgencias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				ListaAgencia listaAgen = new ListaAgencia();
+				ListarAgencia listaAgen = new ListarAgencia();
 				listaAgen.setVisible(true);
 			}
 		});

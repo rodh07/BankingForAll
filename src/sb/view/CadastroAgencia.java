@@ -26,7 +26,7 @@ import java.awt.event.WindowListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
-public class CadAgencia extends PadraoBancario implements WindowListener {
+public class CadastroAgencia extends CabecalhoBancario implements WindowListener {
 
 	private static final int ID_CRIAR_AGENCIA = 0;
 	private JPanel contentPane;
@@ -36,7 +36,7 @@ public class CadAgencia extends PadraoBancario implements WindowListener {
 	private Integer idAgencia;
 	private String tipoSql = "";
 
-	public CadAgencia(final Integer idAgencia) {
+	public CadastroAgencia(final Integer idAgencia) {
 		super();
 		this.idAgencia = idAgencia;
 		addWindowListener(this);
@@ -46,7 +46,7 @@ public class CadAgencia extends PadraoBancario implements WindowListener {
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0 };
 		setLocationRelativeTo(null);
-		setTitle("Cadastro de Agências");
+		setTitle("Cadastro de Agï¿½ncias");
 
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -127,7 +127,7 @@ public class CadAgencia extends PadraoBancario implements WindowListener {
 
 				if (nomeAgenc.equals("") || numero.equals("") || cidade.equals("")) {
 
-					JOptionPane.showMessageDialog(CadAgencia.this, "Informe todos os campos para gravar!", "Atenção",
+					JOptionPane.showMessageDialog(CadastroAgencia.this, "Informe todos os campos para gravar!", "Atenï¿½ï¿½o",
 							JOptionPane.WARNING_MESSAGE);
 
 				} else if (tipoSql.equals("update")) {
@@ -146,7 +146,7 @@ public class CadAgencia extends PadraoBancario implements WindowListener {
 						limparCampos();
 					} else {
 
-						JOptionPane.showMessageDialog(CadAgencia.this, "Número de agência ja utilizado!", "Atenção",
+						JOptionPane.showMessageDialog(CadastroAgencia.this, "Nï¿½mero de agï¿½ncia ja utilizado!", "Atenï¿½ï¿½o",
 								JOptionPane.WARNING_MESSAGE);
 
 					}

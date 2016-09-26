@@ -25,7 +25,7 @@ import sb.controller.ProfissionalController;
 import sb.model.Profissional;
 
 
-public class CadProfissional extends PadraoBancario implements WindowListener {
+public class CadastroProfissional extends CabecalhoBancario implements WindowListener {
 
 	private JPanel contentPane;
 	private JTextField txtNome;
@@ -37,7 +37,7 @@ public class CadProfissional extends PadraoBancario implements WindowListener {
 	private Integer idProfissional;
 	private String tipoSql = "";
 
-	public CadProfissional(final Integer idProfissional) {
+	public CadastroProfissional(final Integer idProfissional) {
 		super();
 		this.idProfissional = idProfissional;
 		addWindowListener(this);
@@ -185,7 +185,7 @@ public class CadProfissional extends PadraoBancario implements WindowListener {
 				if (txtNome.getText().equals("") || txtIdade.getText().equals("") || txtSenha.getText().equals("")
 						|| txtOperaSenhas.getText().equals("") || txtUsuario.getText().equals("")) {
 
-					JOptionPane.showMessageDialog(CadProfissional.this, "Preencha corretamente todos os campos!",
+					JOptionPane.showMessageDialog(CadastroProfissional.this, "Preencha corretamente todos os campos!",
 							"Aten��o", JOptionPane.WARNING_MESSAGE, null);
 					txtNome.requestFocus();
 				} else {

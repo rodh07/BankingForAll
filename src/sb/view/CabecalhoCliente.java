@@ -20,7 +20,7 @@ import sb.model.Conta;
 //import sb.model.HorarioCorreto;
 
 
-public abstract class PadraoCliente extends JFrame {
+public abstract class CabecalhoCliente extends JFrame {
 
 	private JPanel contentPane;
 	protected JLabel lblDataAcess;
@@ -69,7 +69,7 @@ public abstract class PadraoCliente extends JFrame {
 		this.lblSaldo = lblSaldo;
 	}
 
-	public PadraoCliente(Conta conta) {
+	public CabecalhoCliente(Conta conta) {
 		setSize(800, 375);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 370);
