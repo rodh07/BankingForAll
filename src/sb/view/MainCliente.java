@@ -14,7 +14,6 @@ import sb.controller.ContaController;
 import sb.view.MainCliente;
 import sb.model.Conta;
 
-
 public class MainCliente extends CabecalhoCliente {
 
 	static final String CONTA_ELETRONICA = "Conta Eletr�nica";
@@ -34,7 +33,8 @@ public class MainCliente extends CabecalhoCliente {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setTitle("Sistema Banking For All");
-		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
+		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane()
+				.getLayout();
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 1.0 };
 
@@ -49,7 +49,8 @@ public class MainCliente extends CabecalhoCliente {
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 290, 31, 292, 0 };
 		gbl_panel.rowHeights = new int[] { 67, 77, 64, 0 };
-		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0,
+				Double.MIN_VALUE };
 		gbl_panel.rowWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
@@ -112,8 +113,10 @@ public class MainCliente extends CabecalhoCliente {
 		btnFinaliza = new JButton("6- Finalizar");
 		btnFinaliza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				Integer decisao = JOptionPane.showConfirmDialog(MainCliente.this, "Deseja finalizar esta conta?", "", JOptionPane.YES_NO_OPTION);
+
+				Integer decisao = JOptionPane.showConfirmDialog(
+						MainCliente.this, "Deseja finalizar esta conta?", "",
+						JOptionPane.YES_NO_OPTION);
 
 				if (decisao.equals(0)) {
 					new sb.controller.ContaController().finalizarConta(conta);
@@ -133,7 +136,8 @@ public class MainCliente extends CabecalhoCliente {
 	private void validaTipoOperacao(final Conta conta) {
 
 		if (conta.getId() == null) {
-			JOptionPane.showMessageDialog(MainCliente.this, "Usu�rio sem conta cadastrada. Verifique!", "Aten��o",
+			JOptionPane.showMessageDialog(MainCliente.this,
+					"Usu�rio sem conta cadastrada. Verifique!", "Aten��o",
 					JOptionPane.ERROR_MESSAGE);
 
 		} else {

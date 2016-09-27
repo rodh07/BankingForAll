@@ -26,27 +26,29 @@ import java.awt.event.WindowListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
-public class CadastroAgencia extends CabecalhoBancario implements WindowListener {
+public class CadastroAgencia extends CabecalhoBancario implements
+		WindowListener {
 
 	private static final int ID_CRIAR_AGENCIA = 0;
 	private JPanel contentPane;
 	private JTextField txtNome;
-	private JTextField txtNumero;
+	private JTextField txtNumeroAgencia;
 	private JTextField txtCidade;
 	private Integer idAgencia;
-	private String tipoSql = "";
+	private String sql = "";
 
 	public CadastroAgencia(final Integer idAgencia) {
 		super();
 		this.idAgencia = idAgencia;
 		addWindowListener(this);
 		setResizable(false);
-		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
+		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane()
+				.getLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 41, 0 };
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0 };
 		setLocationRelativeTo(null);
-		setTitle("Cadastro de Ag�ncias");
+		setTitle("Cadastro de Agencias");
 
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -60,8 +62,10 @@ public class CadastroAgencia extends CabecalhoBancario implements WindowListener
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 120, 342, 93, 0 };
 		gbl_panel.rowHeights = new int[] { 0, 18, 14, 0, 0, 12, 0, 0, 0, 0 };
-		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0,
+				Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
 		JLabel lblNome = new JLabel("Nome");
@@ -90,14 +94,14 @@ public class CadastroAgencia extends CabecalhoBancario implements WindowListener
 		gbc_lblNewLabel.gridy = 3;
 		panel.add(lblNewLabel, gbc_lblNewLabel);
 
-		txtNumero = new JTextField();
+		txtNumeroAgencia = new JTextField();
 		GridBagConstraints gbc_txtNumero = new GridBagConstraints();
 		gbc_txtNumero.insets = new Insets(0, 0, 5, 5);
 		gbc_txtNumero.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtNumero.gridx = 1;
 		gbc_txtNumero.gridy = 4;
-		panel.add(txtNumero, gbc_txtNumero);
-		txtNumero.setColumns(10);
+		panel.add(txtNumeroAgencia, gbc_txtNumero);
+		txtNumeroAgencia.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("Cidade");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -122,36 +126,38 @@ public class CadastroAgencia extends CabecalhoBancario implements WindowListener
 			public void actionPerformed(ActionEvent arg0) {
 
 				String nomeAgenc = txtNome.getText().trim();
-				String numero = txtNumero.getText().trim();
+				String numero = txtNumeroAgencia.getText().trim();
 				String cidade = txtCidade.getText().trim();
 
-				if (nomeAgenc.equals("") || numero.equals("") || cidade.equals("")) {
-
-					JOptionPane.showMessageDialog(CadastroAgencia.this, "Informe todos os campos para gravar!", "Aten��o",
+				if (nomeAgenc.equals("") || numero.equals("")
+						|| cidade.equals("")) {
+					JOptionPane.showMessageDialog(CadastroAgencia.this,
+							"Informe todos os campos para gravar!", "Aten��o",
 							JOptionPane.WARNING_MESSAGE);
-
-				} else if (tipoSql.equals("update")) {
-					final Agencia agencia = new Agencia(idAgencia, nomeAgenc, numero, cidade);
+				} else if (sql.equals("update")) {
+					final Agencia agencia = new Agencia(idAgencia, nomeAgenc,
+							numero, cidade);
 					new AgenciaController().edit(agencia);
-					tipoSql = "";
+					sql = "";
 					limparCampos();
 				} else {
 
-					int nAgencia = new AgenciaDao().getNumero(txtNumero.getText());
+					int nAgencia = new AgenciaDao().getNumero(txtNumeroAgencia
+							.getText());
 
 					if (nAgencia <= 0) {
 
-						final Agencia agencia = new Agencia(ID_CRIAR_AGENCIA, nomeAgenc, numero, cidade);
+						final Agencia agencia = new Agencia(ID_CRIAR_AGENCIA,
+								nomeAgenc, numero, cidade);
 						new AgenciaController().add(agencia);
 						limparCampos();
 					} else {
 
-						JOptionPane.showMessageDialog(CadastroAgencia.this, "N�mero de ag�ncia ja utilizado!", "Aten��o",
+						JOptionPane.showMessageDialog(CadastroAgencia.this,
+								"Numero de agencia ja utilizado, tente com outro numero", "Erro!",
 								JOptionPane.WARNING_MESSAGE);
-
 					}
 				}
-
 			}
 		});
 		GridBagConstraints gbc_btnConfirma = new GridBagConstraints();
@@ -160,15 +166,8 @@ public class CadastroAgencia extends CabecalhoBancario implements WindowListener
 		gbc_btnConfirma.gridx = 1;
 		gbc_btnConfirma.gridy = 7;
 		panel.add(btnConfirma, gbc_btnConfirma);
-
 	}
 
-	protected void limparCampos() {
-		txtNome.setText("");
-		txtCidade.setText("");
-		txtNumero.setText("");
-
-	}
 
 	@Override
 	public void windowActivated(WindowEvent e) {
@@ -203,7 +202,6 @@ public class CadastroAgencia extends CabecalhoBancario implements WindowListener
 	public void windowOpened(WindowEvent e) {
 
 		Agencia agencia = null;
-
 		if (this.idAgencia != null && this.idAgencia >= 0) {
 			try {
 				final AgenciaController agenciaController = new AgenciaController();
@@ -213,24 +211,24 @@ public class CadastroAgencia extends CabecalhoBancario implements WindowListener
 			}
 		}
 		populaTela(agencia);
-
 	}
-
 	private void populaTela(Agencia agencia) {
 
 		if (agencia == null) {
 			txtCidade.setText("");
 			txtNome.setText("");
-			txtNumero.setText("");
-
+			txtNumeroAgencia.setText("");
 		} else {
-			this.tipoSql = "update";
+			this.sql = "update";
 			txtCidade.setText(agencia.getCidade());
 			txtNome.setText(agencia.getNome());
-			txtNumero.setText(agencia.getNumero());
-
+			txtNumeroAgencia.setText(agencia.getNumeroAgencia());
 		}
-
 	}
-
+	
+	protected void limparCampos() {
+		txtNome.setText("");
+		txtCidade.setText("");
+		txtNumeroAgencia.setText("");
+	}
 }

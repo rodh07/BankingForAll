@@ -18,8 +18,9 @@ public class MainBancario extends CabecalhoBancario {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setTitle("�rea do Bancario");
-		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
+		setTitle("Gerencia");
+		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane()
+				.getLayout();
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0 };
 

@@ -29,7 +29,8 @@ public class ListarCliente extends CabecalhoBancario implements WindowListener {
 
 	public ListarCliente() {
 		super();
-		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
+		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane()
+				.getLayout();
 		gridBagLayout.rowHeights = new int[] { 0, 0 };
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, 1.0, 0.0 };
@@ -48,7 +49,6 @@ public class ListarCliente extends CabecalhoBancario implements WindowListener {
 		scrollPane.setViewportView(tblContas);
 
 	}
-
 	private void preencherTela() {
 
 		try {

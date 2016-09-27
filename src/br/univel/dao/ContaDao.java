@@ -57,7 +57,7 @@ public class ContaDao {
 		stmt.setString(4, conta.getAgencia());
 		stmt.setString(5, conta.getTipoConta().toString());
 		stmt.setString(6, conta.getUsuarioAcesso());
-		stmt.setString(7, conta.getSenhaAcesso());
+		stmt.setString(7, conta.getAcesso());
 		stmt.setString(8, conta.getSenhaOperacoes());
 		stmt.setString(9, conta.getNumeroConta());
 		stmt.setBigDecimal(10, conta.getSaldo());
@@ -189,9 +189,9 @@ public class ContaDao {
 			int updateLinhas = stmt.executeUpdate();
 
 			if (updateLinhas == 0)
-				throw new RuntimeException("Falha ao realizar depósito!");
+				throw new RuntimeException("Falha ao realizar depï¿½sito!");
 
-			JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso!!!");
+			JOptionPane.showMessageDialog(null, "Depï¿½sito realizado com sucesso!!!");
 
 		} catch (SQLException e) {
 			e.printStackTrace();

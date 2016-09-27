@@ -236,7 +236,7 @@ public class CadastroConta extends CabecalhoBancario {
 					conta.setAgencia(txtAgencia.getText());
 					conta.setTipoConta(cmbTipoConta.getSelectedItem().toString());
 					conta.setUsuarioAcesso(txtUsuario.getText());
-					conta.setSenhaAcesso(txtSenhaAcesso.getText());
+					conta.setAcesso(txtSenhaAcesso.getText());
 					conta.setSenhaOperacoes(txtSenhaOpera.getText());
 					conta.setNumeroConta(generateNumberConta());
 					conta.setUsuarioAcesso(txtUsuario.getText());

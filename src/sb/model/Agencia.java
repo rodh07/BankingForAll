@@ -4,13 +4,13 @@ public class Agencia {
 
 	private Integer id;
 	private String nome;
-	private String numero;
+	private String numeroAgencia;
 	private String cidade;
 
 	public Agencia(Integer id, String nome, String numero, String cidade) {
 		this.id = id;
 		this.nome = nome;
-		this.numero = numero;
+		this.numeroAgencia = numero;
 		this.cidade = cidade;
 	}
 
@@ -30,12 +30,12 @@ public class Agencia {
 		this.nome = nome;
 	}
 
-	public String getNumero() {
-		return numero;
+	public String getNumeroAgencia() {
+		return numeroAgencia;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public void setNumeroAgencia(String numero) {
+		this.numeroAgencia = numero;
 	}
 
 	public String getCidade() {

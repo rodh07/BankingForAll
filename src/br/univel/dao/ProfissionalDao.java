@@ -59,7 +59,7 @@ public class ProfissionalDao {
 		stmt.setString(1, profissional.getNome());
 		stmt.setInt(2, profissional.getIdade());
 		stmt.setString(3, profissional.getUserName());
-		stmt.setString(4, profissional.getSenhaAcesso());
+		stmt.setString(4, profissional.getAcesso());
 		stmt.setString(5, profissional.getSenhaOperacoes());
 		stmt.setString(6, profissional.getTipoProfissional().toString());
 	}

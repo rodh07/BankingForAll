@@ -15,7 +15,7 @@ public class Conta {
 	private String numeroConta;
 	private String tipoConta;
 	private String usuarioAcesso;
-	private String senhaAcesso;
+	private String acesso;
 	private String senhaOperacoes;
 	private BigDecimal saldo;
 
@@ -23,7 +23,7 @@ public class Conta {
 	}
 
 	public Conta(Integer id, String nome, Integer idade, String cpf, String agencia, String tipoConta,
-			String usuarioAcesso, String senhaAcesso, String senhaOperacoes, String numeroConta, BigDecimal saldo) {
+			String usuarioAcesso, String acesso, String senhaOperacoes, String numeroConta, BigDecimal saldo) {
 		this.id = id;
 		this.nome = nome;
 		this.idade = idade;
@@ -31,7 +31,7 @@ public class Conta {
 		this.agencia = agencia;
 		this.tipoConta = tipoConta;
 		this.usuarioAcesso = usuarioAcesso;
-		this.senhaAcesso = senhaAcesso;
+		this.acesso = acesso;
 		this.senhaOperacoes = senhaOperacoes;
 		this.numeroConta = numeroConta;
 		this.saldo = saldo;
@@ -102,12 +102,12 @@ public class Conta {
 		this.usuarioAcesso = usuarioAcesso;
 	}
 
-	public String getSenhaAcesso() {
-		return senhaAcesso;
+	public String getAcesso() {
+		return acesso;
 	}
 
-	public void setSenhaAcesso(String senhaAcesso) {
-		this.senhaAcesso = senhaAcesso;
+	public void setAcesso(String Acesso) {
+		this.acesso = Acesso;
 	}
 
 	public String getSenhaOperacoes() {

@@ -21,7 +21,6 @@ import sb.controller.AgenciaController;
 import sb.model.Agencia;
 import sb.model.ListaAgenciaModel;
 
-
 public class ListarAgencia extends CabecalhoBancario implements WindowListener {
 
 	private JPanel contentPane;
@@ -33,7 +32,8 @@ public class ListarAgencia extends CabecalhoBancario implements WindowListener {
 		super();
 		addWindowListener(this);
 		setTitle("Listagem de Ag�ncias");
-		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
+		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane()
+				.getLayout();
 		gridBagLayout.columnWidths = new int[] { 372, 73, 77 };
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0 };
@@ -59,13 +59,16 @@ public class ListarAgencia extends CabecalhoBancario implements WindowListener {
 			public void actionPerformed(ActionEvent e) {
 
 				final Integer rowSelected = tblAgencia.getSelectedRow();
-				
+
 				if (rowSelected <= 0) {
-					JOptionPane.showMessageDialog(ListarAgencia.this, "Selecione uma ag�ncia para editar.", "Aten��o",
+					JOptionPane.showMessageDialog(ListarAgencia.this,
+							"Selecione uma ag�ncia para editar.", "Aten��o",
 							JOptionPane.WARNING_MESSAGE);
 				} else {
-					final Integer rowIndex = tblAgencia.convertRowIndexToModel(rowSelected);
-					final Integer idAgencia = (Integer) tblAgencia.getModel().getValueAt(rowIndex, -1);
+					final Integer rowIndex = tblAgencia
+							.convertRowIndexToModel(rowSelected);
+					final Integer idAgencia = (Integer) tblAgencia.getModel()
+							.getValueAt(rowIndex, -1);
 					new CadastroAgencia(idAgencia).setVisible(true);
 				}
 			}

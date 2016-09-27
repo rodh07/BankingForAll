@@ -12,7 +12,7 @@ public class AgenciaController {
 	public void add(Agencia agencia) {
 
 		try {
-			new AgenciaDao().addAgencia(agencia);
+			new AgenciaDao().adicionaAgencia(agencia);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

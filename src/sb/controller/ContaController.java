@@ -28,13 +28,13 @@ public class ContaController implements Funcionalidades {
 			Command commandUser = new Sha256(conta.getUsuarioAcesso());
 			String userAcessoHash = commandUser.execute();
 
-			Command commandSenha = new Sha256(conta.getSenhaAcesso());
+			Command commandSenha = new Sha256(conta.getAcesso());
 			String senhaAcessoHash = commandSenha.execute();
 
 			Usuario usuario = new Usuario(userAcessoHash, senhaAcessoHash, ClassificacaoUsuario.CLIENTE);
 
 			conta.setUsuarioAcesso(userAcessoHash);
-			conta.setSenhaAcesso(senhaAcessoHash);
+			conta.setAcesso(senhaAcessoHash);
 
 			try {
 
@@ -46,8 +46,8 @@ public class ContaController implements Funcionalidades {
 			}
 
 		} else {
-			String mensagem = "Agência " + conta.getAgencia() + " inexistente!!!";
-			JOptionPane.showMessageDialog(null, mensagem, "Atenção", JOptionPane.ERROR_MESSAGE);
+			String mensagem = "Agï¿½ncia " + conta.getAgencia() + " inexistente!!!";
+			JOptionPane.showMessageDialog(null, mensagem, "Atenï¿½ï¿½o", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -79,7 +79,7 @@ public class ContaController implements Funcionalidades {
 		conta = new ContaDao().getContaDeposito(conta.getAgencia(), conta.getNumeroConta(), conta.getNome());
 
 		if (conta.getId() == null) {
-			JOptionPane.showMessageDialog(null, "Conta não localizada. Verifique!", "Atenção",
+			JOptionPane.showMessageDialog(null, "Conta nï¿½o localizada. Verifique!", "Atenï¿½ï¿½o",
 					JOptionPane.WARNING_MESSAGE);
 		} else {
 

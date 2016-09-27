@@ -6,18 +6,18 @@ public enum ClassificacaoUsuario {
 
 	BANCARIO(1);
 
-	private Integer ordinal;
+	private Integer numeracao;
 
-	private ClassificacaoUsuario(Integer ordinal) {
-		this.ordinal = ordinal;
+	private ClassificacaoUsuario(Integer numeracao) {
+		this.numeracao = numeracao;
 	}
 
-	public Integer getOrdinal() {
-		return ordinal;
+	public Integer getNumeracao() {
+		return numeracao;
 	}
 
-	public void setOrdinal(Integer ordinal) {
-		this.ordinal = ordinal;
+	public void setNumeracao(Integer numeracao) {
+		this.numeracao = numeracao;
 	}
 
 }

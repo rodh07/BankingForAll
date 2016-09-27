@@ -8,7 +8,7 @@ create table usuario(
 create table agencia(
 	id serial,
 	nome varchar(255),
-	numero varchar(255),
+	numeroAgencia varchar(255),
 	cidade varchar(255),
 	primary key(id));
 	
@@ -20,7 +20,7 @@ create table conta(
 	agencia varchar(255),
 	tipoConta varchar(255),
 	usuarioAcesso varchar(255),
-	senhaAcesso varchar(255),
+	acesso varchar(255),
 	senhaOperacoes varchar(255),
 	numeroConta varchar(255),
 	saldo numeric,

@@ -35,7 +35,7 @@ public class ListaAgenciaModel extends AbstractTableModel {
 		case 0:
 			return agencia.getNome();
 		case 1:
-			return agencia.getNumero();
+			return agencia.getNumeroAgencia();
 		case 2:
 			return agencia.getCidade();
 		case 10:
@@ -55,9 +55,9 @@ public class ListaAgenciaModel extends AbstractTableModel {
 
 		switch (col) {
 		case 0:
-			return "Agência";
+			return "Agï¿½ncia";
 		case 1:
-			return "Número";
+			return "Nï¿½mero";
 		case 2:
 			return "Cidade";
 		case 3:

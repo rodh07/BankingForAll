@@ -22,10 +22,10 @@ public class ProfissionalController {
 			Command commandUser = new Sha256(profisisonal.getUserName());
 			String usuarioHash = commandUser.execute();
 
-			Command commandSenha = new Sha256(profisisonal.getSenhaAcesso());
+			Command commandSenha = new Sha256(profisisonal.getAcesso());
 			String senhaHash = commandSenha.execute();
 
-			profisisonal.setSenhaAcesso(senhaHash);
+			profisisonal.setAcesso(senhaHash);
 			profisisonal.setUserName(usuarioHash);
 
 			Usuario usuario = new Usuario(usuarioHash, senhaHash, profisisonal.getTipoProfissional());
@@ -39,12 +39,12 @@ public class ProfissionalController {
 			Command commandUser = new MD5(profisisonal.getUserName());
 			String usuarioHash = commandUser.execute();
 
-			Command commandSenha = new MD5(profisisonal.getSenhaAcesso());
+			Command commandSenha = new MD5(profisisonal.getAcesso());
 			String senhaHash = commandSenha.execute();
 
 			Usuario usuario = new Usuario(usuarioHash, senhaHash, profisisonal.getTipoProfissional());
 
-			profisisonal.setSenhaAcesso(senhaHash);
+			profisisonal.setAcesso(senhaHash);
 			profisisonal.setUserName(usuarioHash);
 
 			new ProfissionalDao().add(profisisonal);
@@ -72,10 +72,10 @@ public class ProfissionalController {
 			Command commandUser = new Sha256(profissional.getUserName());
 			String usuarioHash = commandUser.execute();
 
-			Command commandSenha = new Sha256(profissional.getSenhaAcesso());
+			Command commandSenha = new Sha256(profissional.getAcesso());
 			String senhaHash = commandSenha.execute();
 
-			profissional.setSenhaAcesso(senhaHash);
+			profissional.setAcesso(senhaHash);
 			profissional.setUserName(usuarioHash);
 			
 			new UsuarioDao().edit(new Usuario(usuarioHash, senhaHash, ClassificacaoUsuario.CLIENTE), profissional.getId());
@@ -86,7 +86,7 @@ public class ProfissionalController {
 			Command commandUser = new MD5(profissional.getUserName());
 			String usuarioHash = commandUser.execute();
 
-			Command commandSenha = new MD5(profissional.getSenhaAcesso());
+			Command commandSenha = new MD5(profissional.getAcesso());
 			String senhaHash = commandSenha.execute();
 
 			new UsuarioDao().edit(new Usuario(usuarioHash, senhaHash, ClassificacaoUsuario.BANCARIO), profissional.getId());

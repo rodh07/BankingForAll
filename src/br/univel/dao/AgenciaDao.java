@@ -21,7 +21,7 @@ public class AgenciaDao {
 	private static String SQL_SELECT_ALL = "SELECT * FROM AGENCIA ORDER BY ID";
 	private static String SQL_INSERT = "INSERT INTO AGENCIA (NOME, NUMERO, CIDADE) VALUES (?,?,?)";
 
-	public void addAgencia(Agencia agencia) throws SQLException {
+	public void adicionaAgencia(Agencia agencia) throws SQLException {
 
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -40,7 +40,7 @@ public class AgenciaDao {
 			rs = stmt.getGeneratedKeys();
 			rs.next();
 			agencia.setId(rs.getInt(1));
-			JOptionPane.showMessageDialog(null, "Agência inserida com sucesso!!!");
+			JOptionPane.showMessageDialog(null, "Agï¿½ncia inserida com sucesso!!!");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -53,14 +53,14 @@ public class AgenciaDao {
 	private void writeStatement(Agencia agencia, PreparedStatement stmt) throws SQLException {
 
 		stmt.setString(1, agencia.getNome());
-		stmt.setString(2, agencia.getNumero());
+		stmt.setString(2, agencia.getNumeroAgencia());
 		stmt.setString(3, agencia.getCidade());
 
 	}
 
 	public List<Agencia> buscarAgencias() throws SQLException {
 
-		List<Agencia> agencias = new ArrayList<>();
+		List<Agencia> agencia = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -71,9 +71,9 @@ public class AgenciaDao {
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				agencias.add(readResultSet(rs));
+				agencia.add(readResultSet(rs));
 			}
-			return agencias;
+			return agencia;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,7 +81,7 @@ public class AgenciaDao {
 			close(rs, stmt, con);
 		}
 
-		return agencias;
+		return agencia;
 	}
 
 	private void close(ResultSet rs, PreparedStatement stmt, Connection con) throws SQLException {
@@ -94,8 +94,6 @@ public class AgenciaDao {
 
 	}
 
-	// Metodo faz leitura de todos os campos da agencia no banco e adicionar no
-	// resultSet
 	private Agencia readResultSet(ResultSet rs) throws SQLException {
 		Integer id = rs.getInt("id");
 		String nome = rs.getString("nome");
@@ -139,12 +137,12 @@ public class AgenciaDao {
 
 			stmt.setInt(4, agencia.getId());
 
-			int linhasInseridas = stmt.executeUpdate();
+			int newLinhas = stmt.executeUpdate();
 
-			if (linhasInseridas == 0)
+			if (newLinhas == 0)
 				throw new RuntimeException("Falha ao inserir dados na tabela Agencia");
 
-			JOptionPane.showMessageDialog(null, "Agência atualizada com sucesso!!!");
+			JOptionPane.showMessageDialog(null, "Agï¿½ncia atualizada com sucesso!!!");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -156,7 +154,7 @@ public class AgenciaDao {
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs;
-		int agEncontradas = 0;
+		int newAgencias = 0;
 		try {
 			con = Conexao.getConnection();
 			stmt = con.prepareStatement(SQL_SELECT_AGENCIA);
@@ -166,13 +164,13 @@ public class AgenciaDao {
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				agEncontradas = rs.getInt(1);
+				newAgencias = rs.getInt(1);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return agEncontradas;
+		return newAgencias;
 	}
 
 }

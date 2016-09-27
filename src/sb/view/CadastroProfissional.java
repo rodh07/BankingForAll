@@ -24,18 +24,18 @@ import sb.classificacoes.ClassificacaoUsuario;
 import sb.controller.ProfissionalController;
 import sb.model.Profissional;
 
-
-public class CadastroProfissional extends CabecalhoBancario implements WindowListener {
+public class CadastroProfissional extends CabecalhoBancario implements
+		WindowListener {
 
 	private JPanel contentPane;
 	private JTextField txtNome;
 	private JTextField txtIdade;
-	private JTextField txtOperaSenhas;
+	private JTextField txtOperacoesSenhas;
 	private JTextField txtUsuario;
 	private JTextField txtSenha;
 	private JComboBox cmbTipoProfissional;
 	private Integer idProfissional;
-	private String tipoSql = "";
+	private String sql = "";
 
 	public CadastroProfissional(final Integer idProfissional) {
 		super();
@@ -44,7 +44,8 @@ public class CadastroProfissional extends CabecalhoBancario implements WindowLis
 		setResizable(false);
 		setTitle("Cadastro de Profissionais");
 		setLocationRelativeTo(null);
-		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane().getLayout();
+		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane()
+				.getLayout();
 		gridBagLayout.columnWidths = new int[] { 36, 530, 0 };
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, 1.0, 0.0 };
@@ -60,8 +61,10 @@ public class CadastroProfissional extends CabecalhoBancario implements WindowLis
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 64, 63, 123, 207, 0 };
 		gbl_panel.rowHeights = new int[] { 20, 0, 0, 14, 20, 14, 20, 38, 0 };
-		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
 		JLabel lblNome = new JLabel("Nome");
@@ -122,14 +125,15 @@ public class CadastroProfissional extends CabecalhoBancario implements WindowLis
 		}
 
 		try {
-			txtOperaSenhas = new JFormattedTextField(new MaskFormatter("########"));
-			GridBagConstraints gbc_txtSenhaOperacoes = new GridBagConstraints();
-			gbc_txtSenhaOperacoes.fill = GridBagConstraints.HORIZONTAL;
-			gbc_txtSenhaOperacoes.insets = new Insets(0, 0, 5, 5);
-			gbc_txtSenhaOperacoes.gridx = 2;
-			gbc_txtSenhaOperacoes.gridy = 4;
-			panel.add(txtOperaSenhas, gbc_txtSenhaOperacoes);
-			txtOperaSenhas.setColumns(10);
+			txtOperacoesSenhas = new JFormattedTextField(new MaskFormatter(
+					"########"));
+			GridBagConstraints gbc_txtOperacoesSenhas = new GridBagConstraints();
+			gbc_txtOperacoesSenhas.fill = GridBagConstraints.HORIZONTAL;
+			gbc_txtOperacoesSenhas.insets = new Insets(0, 0, 5, 5);
+			gbc_txtOperacoesSenhas.gridx = 2;
+			gbc_txtOperacoesSenhas.gridy = 4;
+			panel.add(txtOperacoesSenhas, gbc_txtOperacoesSenhas);
+			txtOperacoesSenhas.setColumns(10);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
@@ -182,34 +186,37 @@ public class CadastroProfissional extends CabecalhoBancario implements WindowLis
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (txtNome.getText().equals("") || txtIdade.getText().equals("") || txtSenha.getText().equals("")
-						|| txtOperaSenhas.getText().equals("") || txtUsuario.getText().equals("")) {
+				if (txtNome.getText().equals("")
+						|| txtIdade.getText().equals("")
+						|| txtSenha.getText().equals("")
+						|| txtOperacoesSenhas.getText().equals("")
+						|| txtUsuario.getText().equals("")) {
 
-					JOptionPane.showMessageDialog(CadastroProfissional.this, "Preencha corretamente todos os campos!",
-							"Aten��o", JOptionPane.WARNING_MESSAGE, null);
+					JOptionPane.showMessageDialog(CadastroProfissional.this,
+							"Campos incorretos, tente novamente!",
+							"Erro!", JOptionPane.WARNING_MESSAGE, null);
 					txtNome.requestFocus();
 				} else {
 
-					Profissional profissional = new Profissional();
-					profissional.setId(idProfissional);
-					profissional.setIdade(Integer.parseInt(txtIdade.getText()));
-					profissional.setNome(txtNome.getText().trim());
-					profissional.setSenhaAcesso(txtSenha.getText());
-					profissional.setSenhaOperacoes(txtOperaSenhas.getText());
-					profissional.setUserName(txtUsuario.getText());
-					profissional.setTipoProfissional((ClassificacaoUsuario) cmbTipoProfissional.getSelectedItem());
-
-					if (tipoSql.equals("update")) {
-
-						new ProfissionalController().edit(profissional);
+					Profissional pro = new Profissional();
+					pro.setId(idProfissional);
+					pro.setIdade(Integer.parseInt(txtIdade.getText()));
+					pro.setNome(txtNome.getText().trim());
+					pro.setAcesso(txtSenha.getText());
+					pro.setSenhaOperacoes(txtOperacoesSenhas.getText());
+					pro.setUserName(txtUsuario.getText());
+					pro
+							.setTipoProfissional((ClassificacaoUsuario) cmbTipoProfissional
+									.getSelectedItem());
+					if (sql.equals("update")) {
+						new ProfissionalController().edit(pro);
 						limparCampos();
 					} else {
-						new ProfissionalController().add(profissional);
+						new ProfissionalController().add(pro);
 						limparCampos();
 
 					}
 				}
-
 			}
 		});
 		GridBagConstraints gbc_btnConfirmar = new GridBagConstraints();
@@ -217,19 +224,7 @@ public class CadastroProfissional extends CabecalhoBancario implements WindowLis
 		gbc_btnConfirmar.gridx = 3;
 		gbc_btnConfirmar.gridy = 7;
 		panel.add(btnConfirmar, gbc_btnConfirmar);
-
 	}
-
-	protected void limparCampos() {
-
-		txtIdade.setText("");
-		txtNome.setText("");
-		txtSenha.setText("");
-		txtOperaSenhas.setText("");
-		txtUsuario.setText("");
-		cmbTipoProfissional.setSelectedItem(0);
-	}
-
 	@Override
 	public void windowActivated(WindowEvent e) {
 
@@ -286,20 +281,26 @@ public class CadastroProfissional extends CabecalhoBancario implements WindowLis
 			txtIdade.setText("");
 			txtNome.setText("");
 			txtSenha.setText("");
-			txtOperaSenhas.setText("");
+			txtOperacoesSenhas.setText("");
 			txtUsuario.setText("");
 
 		} else {
-			this.tipoSql = "update";
+			this.sql = "update";
 			txtIdade.setText(profissional.getIdade().toString());
 			txtNome.setText(profissional.getNome());
-			txtSenha.setText(profissional.getSenhaAcesso());
-			txtOperaSenhas.setText(profissional.getSenhaOperacoes());
+			txtSenha.setText(profissional.getAcesso());
+			txtOperacoesSenhas.setText(profissional.getSenhaOperacoes());
 			txtUsuario.setText(profissional.getUserName());
-			cmbTipoProfissional.setSelectedItem(profissional.getTipoProfissional().getOrdinal());
-
+			cmbTipoProfissional.setSelectedItem(profissional
+			.getTipoProfissional().getNumeracao());
 		}
-
 	}
-
+	protected void limparCampos() {
+		txtIdade.setText("");
+		txtNome.setText("");
+		txtSenha.setText("");
+		txtOperacoesSenhas.setText("");
+		txtUsuario.setText("");
+		cmbTipoProfissional.setSelectedItem(0);
+	}
 }

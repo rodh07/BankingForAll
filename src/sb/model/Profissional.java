@@ -8,17 +8,17 @@ public class Profissional {
 	private String nome;
 	private Integer idade;
 	private String usuario;
-	private String senhaAcesso;
+	private String acesso;
 	private String senhaOperacoes;
 	private ClassificacaoUsuario tipoProfissional;
 
-	public Profissional(Integer id, String nome, String usuario, Integer idade, String senhaAcesso,
+	public Profissional(Integer id, String nome, String usuario, Integer idade, String acesso,
 			String senhaOperacoes, ClassificacaoUsuario tipoProfissional) {
 		this.id = id;
 		this.nome = nome;
 		this.usuario = usuario;
 		this.idade = idade;
-		this.senhaAcesso = senhaAcesso;
+		this.acesso = acesso;
 		this.senhaOperacoes = senhaOperacoes;
 		this.tipoProfissional = tipoProfissional;
 	}
@@ -58,12 +58,12 @@ public class Profissional {
 		this.usuario = userName;
 	}
 
-	public String getSenhaAcesso() {
-		return senhaAcesso;
+	public String getAcesso() {
+		return acesso;
 	}
 
-	public void setSenhaAcesso(String senhaAcesso) {
-		this.senhaAcesso = senhaAcesso;
+	public void setAcesso(String Acesso) {
+		this.acesso = Acesso;
 	}
 
 	public String getSenhaOperacoes() {
