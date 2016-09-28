@@ -14,22 +14,32 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import sb.classificacoes.TipoOperacao;
+import sb.controller.ContaController;
+import sb.view.OperacaoConfirmada;
 import sb.model.Conta;
 
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Teclado extends JFrame {
-
+	
+	private static final long serialVersionUID = 1L;
+	private StringBuilder senhaTeclado;
 	private JPanel contentPane;
-	private JTextField txtSenha;
+	private JTextField txtSenhaOperacao;
+	private Teclado teclado;
+
 
 	public Teclado(Conta conta, BigDecimal valor, Conta contaTransferir,
 			TipoOperacao operacao, String codBarras) {
 		setSize(176, 238);
 		setTitle("Senha");
+		teclado = this;
+		senhaTeclado = new StringBuilder();
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("./Imagens/Play.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("./Icones/Play.png"));
 
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.NORTH);
@@ -42,25 +52,25 @@ public class Teclado extends JFrame {
 				0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
-		JLabel lblNewLabel = new JLabel("TECLADO VIRTUAL");
-		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.gridwidth = 3;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 2;
-		gbc_lblNewLabel.gridy = 0;
-		panel.add(lblNewLabel, gbc_lblNewLabel);
+		JLabel lblTeclado = new JLabel("TECLADO VIRTUAL");
+		lblTeclado.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		GridBagConstraints gbc_lblTeclado = new GridBagConstraints();
+		gbc_lblTeclado.gridwidth = 3;
+		gbc_lblTeclado.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTeclado.gridx = 2;
+		gbc_lblTeclado.gridy = 0;
+		panel.add(lblTeclado, gbc_lblTeclado);
 
-		txtSenha = new JTextField();
-		GridBagConstraints gbc_txtSenha = new GridBagConstraints();
-		gbc_txtSenha.gridwidth = 3;
-		gbc_txtSenha.fill = GridBagConstraints.BOTH;
-		gbc_txtSenha.insets = new Insets(0, 0, 5, 5);
-		gbc_txtSenha.gridx = 2;
-		gbc_txtSenha.gridy = 1;
-		panel.add(txtSenha, gbc_txtSenha);
-		txtSenha.setColumns(10);
-		txtSenha.requestFocus();
+		txtSenhaOperacao = new JTextField();
+		GridBagConstraints gbc_txtSenhaOperacao = new GridBagConstraints();
+		gbc_txtSenhaOperacao.gridwidth = 3;
+		gbc_txtSenhaOperacao.fill = GridBagConstraints.BOTH;
+		gbc_txtSenhaOperacao.insets = new Insets(0, 0, 5, 5);
+		gbc_txtSenhaOperacao.gridx = 2;
+		gbc_txtSenhaOperacao.gridy = 1;
+		panel.add(txtSenhaOperacao, gbc_txtSenhaOperacao);
+		txtSenhaOperacao.setColumns(10);
+		txtSenhaOperacao.requestFocus();
 
 		JButton btnSete = new JButton("7");
 		GridBagConstraints gbc_btnSete = new GridBagConstraints();
@@ -111,6 +121,13 @@ public class Teclado extends JFrame {
 		panel.add(btnSeis, gbc_btnSeis);
 
 		JButton btnUm = new JButton("1");
+		btnUm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				senhaTeclado.append("1");
+				SetarNumero(senhaTeclado);
+			}
+		});
 		GridBagConstraints gbc_btnUm = new GridBagConstraints();
 		gbc_btnUm.anchor = GridBagConstraints.WEST;
 		gbc_btnUm.insets = new Insets(0, 0, 5, 5);
@@ -135,6 +152,13 @@ public class Teclado extends JFrame {
 		panel.add(btnTres, gbc_btnTres);
 
 		JButton button = new JButton("-");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				senhaTeclado.append("0");
+				SetarNumero(senhaTeclado);
+			}
+		});
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.insets = new Insets(0, 0, 5, 5);
 		gbc_button.gridx = 2;
@@ -142,6 +166,13 @@ public class Teclado extends JFrame {
 		panel.add(button, gbc_button);
 
 		JButton btnZero = new JButton("0");
+		btnZero.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				senhaTeclado.append("0");
+				SetarNumero(senhaTeclado);
+			}
+		});
 		GridBagConstraints gbc_btnZero = new GridBagConstraints();
 		gbc_btnZero.anchor = GridBagConstraints.WEST;
 		gbc_btnZero.insets = new Insets(0, 0, 5, 5);
@@ -150,6 +181,12 @@ public class Teclado extends JFrame {
 		panel.add(btnZero, gbc_btnZero);
 
 		JButton button_1 = new JButton("-");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+					limparCampos();
+			}
+		});
 		GridBagConstraints gbc_button_1 = new GridBagConstraints();
 		gbc_button_1.anchor = GridBagConstraints.WEST;
 		gbc_button_1.insets = new Insets(0, 0, 5, 5);
@@ -167,6 +204,60 @@ public class Teclado extends JFrame {
 		gbc_btnConfirmar.gridx = 2;
 		gbc_btnConfirmar.gridy = 6;
 		panel.add(btnConfirmar, gbc_btnConfirmar);
+	}
+
+	protected void SetarNumero(StringBuilder senha) {
+
+		txtSenhaOperacao.setText(senha.toString());
+	}
+	
+	private void limparCampos() {
+		senhaTeclado = new StringBuilder();
+		SetarNumero(senhaTeclado);
+	}
+	
+	protected void validacaoPagamento(Conta conta, BigDecimal valor,
+			TipoOperacao operacao, String codBarras) {
+
+		boolean pagou = new sb.controller.ContaController()
+				.pagamento(conta, valor, codBarras);
+		limparCampos();
+		if (pagou) {
+			OperacaoConfirmada operacaoConfirmada = new OperacaoConfirmada(conta,
+					TipoOperacao.PAGAMENTO, valor);
+			operacaoConfirmada.setVisible(true);
+			teclado.setVisible(false);
+		}
 
 	}
+
+	protected void validacaoTransferencia(Conta conta, Conta contaTransferir,
+			BigDecimal valor) {
+
+		boolean transferiu = new sb.controller.ContaController().transferencia(conta,
+				contaTransferir, valor);
+
+		limparCampos();
+
+		if (transferiu) {
+			OperacaoConfirmada operacaoConfirmada = new OperacaoConfirmada(
+					contaTransferir, TipoOperacao.TRANSFERENCIA, valor);
+			operacaoConfirmada.setVisible(true);
+			teclado.setVisible(false);
+		}
+	}
+	protected void validacaoSaque(Conta conta, BigDecimal valorSaque) {
+		boolean sacou = new ContaController().saque(conta, valorSaque,
+				senhaTeclado.toString());
+
+		limparCampos();
+
+		if (sacou) {
+			OperacaoConfirmada opRealizada = new OperacaoConfirmada(conta,
+					TipoOperacao.SAQUE, valorSaque);
+			opRealizada.setVisible(true);
+			teclado.setVisible(false);
+		}
+	}
+
 }

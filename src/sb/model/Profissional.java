@@ -89,5 +89,5 @@ public class Profissional {
 	public void setTipoProfissional(ClassificacaoUsuario tipoProfissional) {
 		this.tipoProfissional = tipoProfissional;
 	}
-
+	
 }
