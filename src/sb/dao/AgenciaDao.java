@@ -1,4 +1,4 @@
-package br.univel.dao;
+package sb.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

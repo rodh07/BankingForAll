@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -154,6 +155,45 @@ public class MainCliente extends CabecalhoCliente {
 				break;
 			}
 		}
+	}
+
+	@Override
+	public void deposito(Conta conta, BigDecimal valorDeposito) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean saque(Conta conta, BigDecimal valorSaque,
+			String senhaInformada) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean transferencia(Conta conta, Conta contaRecebeTransf,
+			BigDecimal valorTransf) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void finalizarConta(Conta conta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void contaAlterada(Conta conta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean pagamento(Conta conta, BigDecimal valorPagamento,
+			String codigoDeBarras) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

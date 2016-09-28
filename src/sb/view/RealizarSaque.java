@@ -12,18 +12,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
-
+import sb.view.CabecalhoCliente;
 import sb.classificacoes.tipoOperacao;
 import sb.view.Teclado;
 import sb.model.Conta;
-
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.awt.event.ActionEvent;
 
 public class RealizarSaque extends CabecalhoCliente {
-
+	
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtValor;
 
@@ -164,10 +164,11 @@ public class RealizarSaque extends CabecalhoCliente {
 		btnSaque.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (txtValor.getText().equals("0.00")) {
+				if (txtValor.getText().equals("0.00")
+						|| txtValor.getText().equals("")) {
 					JOptionPane.showMessageDialog(RealizarSaque.this,
-							"É necessário informar um valor para sacar",
-							"Atencao", JOptionPane.WARNING_MESSAGE);
+							"Deve ser informado valor para saque",
+							"Erro", JOptionPane.WARNING_MESSAGE);
 				} else {
 					new Teclado(conta, new BigDecimal(txtValor.getText()
 							.replace(".", "").replace(",", ".").toString()),
@@ -182,6 +183,41 @@ public class RealizarSaque extends CabecalhoCliente {
 		gbc_btnSaque.gridx = 3;
 		gbc_btnSaque.gridy = 3;
 		panel.add(btnSaque, gbc_btnSaque);
-
 	}
+		@Override
+		public void contaAlterada(Conta conta) {
+
+			CabecalhoCliente.populaTelaInfConta(conta);
+		
+	}
+	
+		@Override
+		public void deposito(Conta conta, BigDecimal valorDeposito) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public boolean saque(Conta conta, BigDecimal valorSaque,
+				String senhaInformada) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		@Override
+		public boolean transferencia(Conta conta, Conta contaRecebeTransf,
+				BigDecimal valorTransf) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		@Override
+		public void finalizarConta(Conta conta) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public boolean pagamento(Conta conta, BigDecimal valorPagamento,
+				String codigoDeBarras) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
 }

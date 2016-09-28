@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import br.univel.dao.AgenciaDao;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import sb.controller.AgenciaController;
+import sb.dao.AgenciaDao;
 import sb.model.Agencia;
 
 import java.awt.event.ActionListener;

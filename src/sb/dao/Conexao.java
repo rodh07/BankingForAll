@@ -1,4 +1,4 @@
-package br.univel.dao;
+package sb.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -30,4 +30,16 @@ public class Conexao {
 
 	}
 
+	public static void close(ResultSet set, Statement stmt, Connection conn) {
+		try {
+			if (set != null && !set.isClosed())
+				set.close();
+			if (stmt != null && !stmt.isClosed())
+				stmt.close();
+			if (conn != null && !conn.isClosed())
+				conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

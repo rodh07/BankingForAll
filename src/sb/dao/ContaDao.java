@@ -1,4 +1,4 @@
-package br.univel.dao;
+package sb.dao;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -12,21 +12,20 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import sb.model.Conta;
-import sb.model.Funcionalidades;
-
 
 public class ContaDao {
 
-	private static final String SQL_GET_CONTA = "SELECT * FROM CONTA WHERE USUARIOACESSO = ? AND SENHAACESSO = ?";
-	private static final String SQL_GET_CONTADEPOSITO = "SELECT * FROM CONTA WHERE AGENCIA = ? AND NUMEROCONTA = ? AND NOME = ?";
-	private static final String SQL_INSERT = "INSERT INTO CONTA (NOME, IDADE, CPF, AGENCIA, TIPOCONTA, USUARIOACESSO, SENHAACESSO, SENHAOPERACOES, NUMEROCONTA, SALDO) VALUES (?,?,?,?,?,?,?,?,?,?)";
-	private static final String SQL_SELECT_ALL = "SELECT * FROM CONTA";
-	private static final String SQL_DEPOSITO = "UPDATE CONTA SET SALDO = ? WHERE NUMEROCONTA = ? AND NOME = ?";
+	private static final String SQL_GET_CONTA = "SELECT * FROM CONTA WHERE USUARIOACESSO = ? AND SENHAACESSO = ? AND SITUACAO = 'ATIVO'";
+	private static final String SQL_GET_CONTA_DEPOSITO = "SELECT * FROM CONTA WHERE AGENCIA = ? AND NUMEROCONTA = ? AND NOME = ? AND SITUACAO = 'ATIVO'";
+	private static final String SQL_INSERT = "INSERT INTO CONTA (NOME, IDADE, CPF, AGENCIA, TIPOCONTA, USUARIOACESSO, SENHAACESSO, SENHAOPERACOES, NUMEROCONTA, SALDO, SITUACAO) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String SQL_SELECT_ALL = "SELECT * FROM CONTA WHERE SITUACAO = 'ATIVO'";
+	private static final String SQL_UPDATE_SALDO_CONTA = "UPDATE CONTA SET SALDO = ? WHERE NUMEROCONTA = ? AND NOME = ?";
+	private static final String SQL_INATIVAR = "UPDATE CONTA SET SITUACAO = 'INATIVO' WHERE ID = ?";
 
-	public void add(Conta conta) throws SQLException {
+	public void add(Conta conta) {
 		Connection con = null;
 		PreparedStatement stmt = null;
-		ResultSet rs;
+		ResultSet rs = null;
 		try {
 			con = Conexao.getConnection();
 			stmt = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
@@ -45,7 +44,7 @@ public class ContaDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(null, stmt, con);
+			Conexao.close(rs, stmt, con);
 		}
 	}
 
@@ -61,9 +60,10 @@ public class ContaDao {
 		stmt.setString(8, conta.getSenhaOperacoes());
 		stmt.setString(9, conta.getNumeroConta());
 		stmt.setBigDecimal(10, conta.getSaldo());
+		stmt.setString(11, conta.getSituacaoBancaria());
 	}
 
-	public Conta get(String userHash, String senhaHash) {
+	public Conta get(String userAcessoHash, String senhaAcessoHash) {
 
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -74,8 +74,8 @@ public class ContaDao {
 			con = Conexao.getConnection();
 			stmt = con.prepareStatement(SQL_GET_CONTA);
 
-			stmt.setString(1, userHash);
-			stmt.setString(2, senhaHash);
+			stmt.setString(1, userAcessoHash);
+			stmt.setString(2, senhaAcessoHash);
 
 			rs = stmt.executeQuery();
 
@@ -91,7 +91,7 @@ public class ContaDao {
 		return conta;
 	}
 
-	public List<Conta> buscarContas() throws SQLException {
+	public List<Conta> buscarContas() {
 		List<Conta> contas = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -111,7 +111,7 @@ public class ContaDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rs, stmt, con);
+			Conexao.close(rs, stmt, con);
 		}
 		return contas;
 
@@ -130,30 +130,21 @@ public class ContaDao {
 		String senhaAcesso = rs.getString("senhaAcesso");
 		String numeroConta = rs.getString("numeroConta");
 		BigDecimal saldo = rs.getBigDecimal("saldo");
+		String situacaoBancaria = rs.getString("situacao");
 
 		return new Conta(id, nome, idade, cpf, agencia, tipoConta, usuarioAcesso, senhaAcesso, senhaOperacoes,
-				numeroConta, saldo);
+				numeroConta, saldo, situacaoBancaria);
 	}
 
-	private void close(ResultSet rs, PreparedStatement stmt, Connection con) throws SQLException {
-		if (rs != null && !rs.isClosed())
-			rs.close();
-		if (stmt != null && !stmt.isClosed())
-			stmt.close();
-		if (con != null && !con.isClosed())
-			con.close();
-
-	}
-
-	public Conta getContaDeposito(String agencia, String numero, String titular) {
+	public Conta getConta(String agencia, String numero, String titular) {
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		Conta conta = new Conta();
+		Conta conta = null;
 
 		try {
 			con = Conexao.getConnection();
-			stmt = con.prepareStatement(SQL_GET_CONTADEPOSITO);
+			stmt = con.prepareStatement(SQL_GET_CONTA_DEPOSITO);
 
 			stmt.setString(1, agencia);
 			stmt.setString(2, numero);
@@ -165,36 +156,65 @@ public class ContaDao {
 				conta = (Conta) readResultSet(rs);
 			}
 
+			if (conta == null) {
+				JOptionPane.showMessageDialog(null, "Conta não localizada!", "Atenção", JOptionPane.ERROR_MESSAGE);
+			}
 			return conta;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return conta;
+		return null;
 	}
 
-	public void depositar(Conta conta, BigDecimal valorDeposito) {
+	public void updateSaldo(Conta conta, BigDecimal valorDeposito) {
 
 		Connection con = null;
 		PreparedStatement stmt = null;
 
 		try {
 			con = Conexao.getConnection();
-			stmt = con.prepareStatement(SQL_DEPOSITO);
+			stmt = con.prepareStatement(SQL_UPDATE_SALDO_CONTA);
 
 			stmt.setBigDecimal(1, valorDeposito);
 			stmt.setString(2, conta.getNumeroConta());
 			stmt.setString(3, conta.getNome());
 
-			int updateLinhas = stmt.executeUpdate();
+			int linhasAtualizadas = stmt.executeUpdate();
 
-			if (updateLinhas == 0)
-				throw new RuntimeException("Falha ao realizar depï¿½sito!");
+			if (linhasAtualizadas == 0)
+				throw new RuntimeException("Falha ao realizar operação!!!");
 
-			JOptionPane.showMessageDialog(null, "Depï¿½sito realizado com sucesso!!!");
+			JOptionPane.showMessageDialog(null, "Saldo atualizado com sucesso!!!");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+
+	}
+
+	public void inativarConta(Conta conta) {
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+
+		con = Conexao.getConnection();
+		try {
+			stmt = con.prepareStatement(SQL_INATIVAR);
+
+			stmt.setInt(1, conta.getId());
+			int linhasAtualizadas = stmt.executeUpdate();
+
+			if (linhasAtualizadas == 0) {
+				JOptionPane.showMessageDialog(null, "Conta não inativada", "Atenção", JOptionPane.ERROR_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(null, "Conta inativada com sucesso!");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Conexao.close(null, stmt, con);
 		}
 
 	}

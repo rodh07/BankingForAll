@@ -3,9 +3,9 @@ package sb.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import sb.dao.AgenciaDao;
 import sb.model.Agencia;
 
-import br.univel.dao.AgenciaDao;
 
 public class AgenciaController {
 

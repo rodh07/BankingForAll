@@ -1,13 +1,12 @@
-package br.univel.dao;
+package sb.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import javax.swing.JOptionPane;
-
+import sb.model.Conta;
 import sb.model.Usuario;
 
 
@@ -18,7 +17,8 @@ public class UsuarioDao {
 	private static String SQL_INSERT = "INSERT INTO USUARIO (USUARIO, SENHA,TIPOUSUARIO) VALUES (?,?,?)";
 	private static String SQL_UPDATE = "UPDATE USUARIO SET USUARIO = ?, SENHA = ?, TIPOUSUARIO = ? WHERE ID = ?";
 	private static String SQL_DELETE = "DELETE FROM USUARIO WHERE ID = ?";
-
+	private static String SQL_INATIVAR_USUARIO = "UPDATE USUARIO SET SITUACAO = 'INATIVO' WHERE USUARIO = ?";
+	
 	public boolean acessoLogin(final String usuario, final String senha) {
 
 		Connection con = null;
@@ -114,4 +114,31 @@ public class UsuarioDao {
 		}
 	}
 
+	public void inativarConta(Conta conta) {
+
+		Connection con = null;
+		PreparedStatement stmt = null;
+
+		con = Conexao.getConnection();
+
+		try {
+			stmt = con.prepareStatement(SQL_INATIVAR_USUARIO);
+
+			stmt.setString(1, conta.getUsuarioAcesso());
+
+			int linhasAtualizadas = stmt.executeUpdate();
+
+			if (linhasAtualizadas == 0) {
+				JOptionPane.showMessageDialog(null, "Erro ao inativar usuario!", "Atenção", JOptionPane.ERROR_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(null, "Usuario inativado com suscesso");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Conexao.close(null, stmt, con);
+		}
+
+	}
 }

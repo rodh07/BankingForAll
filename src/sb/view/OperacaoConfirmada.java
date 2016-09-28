@@ -9,10 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import sb.model.Conta;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.math.BigDecimal;
 
 public class OperacaoConfirmada extends CabecalhoCliente {
 
@@ -53,6 +55,45 @@ public class OperacaoConfirmada extends CabecalhoCliente {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void deposito(Conta conta, BigDecimal valorDeposito) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean saque(Conta conta, BigDecimal valorSaque,
+			String senhaInformada) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean transferencia(Conta conta, Conta contaRecebeTransf,
+			BigDecimal valorTransf) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void finalizarConta(Conta conta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void contaAlterada(Conta conta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean pagamento(Conta conta, BigDecimal valorPagamento,
+			String codigoDeBarras) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -16,18 +16,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+
 import sb.model.Conta;
 //import sb.model.HorarioCorreto;
+import sb.model.Funcionalidades;
 
 
-public abstract class CabecalhoCliente extends JFrame {
+public abstract class CabecalhoCliente extends JFrame implements Funcionalidades {
 
-	private JPanel contentPane;
-	protected JLabel lblDataAcess;
-	private JLabel lblAgencia;
-	private JLabel lblTipoConta;
-	private JLabel lblNumConta;
-	private JLabel lblSaldo;
+	private static JPanel contentPane;
+	protected static JLabel lblDataAcess;
+	private static JLabel lblAgencia;
+	private static JLabel lblTipoConta;
+	private static JLabel lblNumConta;
+	private static JLabel lblSaldo;
 
 	public JLabel getLblDataAcess() {
 		return lblDataAcess;
@@ -73,12 +75,13 @@ public abstract class CabecalhoCliente extends JFrame {
 		setSize(800, 375);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 370);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("./Imagens/Icone.png"));
+		setIconImage(Toolkit.getDefaultToolkit().
+				getImage("./Icones/Play256x256.png"));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 77, 0, 414, 0 };
+		gbl_contentPane.columnWidths = new int[] { 131, 23, 414, 0 };
 		gbl_contentPane.rowHeights = new int[] { 89, 253, 0 };
 		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
@@ -94,11 +97,21 @@ public abstract class CabecalhoCliente extends JFrame {
 		gbc_cabecalho.gridy = 0;
 		contentPane.add(cabecalho, gbc_cabecalho);
 		GridBagLayout gbl_cabecalho = new GridBagLayout();
-		gbl_cabecalho.columnWidths = new int[] { 94, 208, 90, 0 };
+		gbl_cabecalho.columnWidths = new int[] { 110, 13, 208, 90, 0 };
 		gbl_cabecalho.rowHeights = new int[] { 67, 0, 0 };
-		gbl_cabecalho.columnWeights = new double[] { 0.0, 1.0, 1.0, Double.MIN_VALUE };
+		gbl_cabecalho.columnWeights = new double[] { 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE };
 		gbl_cabecalho.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
 		cabecalho.setLayout(gbl_cabecalho);
+		
+		JLabel Icon2 = new JLabel("");
+	//	Icon2.setIcon(new ImageIcon(CabecalhoCliente.class.getResource("./Icones/Play256x256.png")));
+		GridBagConstraints gbc_Icon2 = new GridBagConstraints();
+		gbc_Icon2.gridheight = 2;
+		gbc_Icon2.insets = new Insets(0, 0, 5, 5);
+		gbc_Icon2.gridx = 0;
+		gbc_Icon2.gridy = 0;
+		cabecalho.add(Icon2, gbc_Icon2);
+		
 
 		JLabel lblNomeBanco = new JLabel("Banking For All");
 		lblNomeBanco.setForeground(Color.BLACK);
@@ -106,7 +119,7 @@ public abstract class CabecalhoCliente extends JFrame {
 		GridBagConstraints gbc_lblNomeBanco = new GridBagConstraints();
 		gbc_lblNomeBanco.fill = GridBagConstraints.BOTH;
 		gbc_lblNomeBanco.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNomeBanco.gridx = 1;
+		gbc_lblNomeBanco.gridx = 2;
 		gbc_lblNomeBanco.gridy = 0;
 		cabecalho.add(lblNomeBanco, gbc_lblNomeBanco);
 
@@ -117,18 +130,9 @@ public abstract class CabecalhoCliente extends JFrame {
 		GridBagConstraints gbc_lblDataAcess = new GridBagConstraints();
 		gbc_lblDataAcess.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblDataAcess.insets = new Insets(0, 0, 5, 0);
-		gbc_lblDataAcess.gridx = 2;
+		gbc_lblDataAcess.gridx = 3;
 		gbc_lblDataAcess.gridy = 0;
 		cabecalho.add(lblDataAcess, gbc_lblDataAcess);
-
-		JLabel imagem = new JLabel("");
-		imagem.setIcon(new ImageIcon("C:\\Users\\Help Desk\\Desktop\\BankingForAll\\Imagens\\Play.png"));
-		GridBagConstraints gbc_imagem = new GridBagConstraints();
-		gbc_imagem.gridheight = 2;
-		gbc_imagem.insets = new Insets(0, 0, 0, 5);
-		gbc_imagem.gridx = 0;
-		gbc_imagem.gridy = 0;
-		cabecalho.add(imagem, gbc_imagem);
 
 		JLabel lblSubtitulo = new JLabel("It's free, go go!");
 		lblSubtitulo.setForeground(Color.BLACK);
@@ -136,7 +140,7 @@ public abstract class CabecalhoCliente extends JFrame {
 		GridBagConstraints gbc_lblSubtitulo = new GridBagConstraints();
 		gbc_lblSubtitulo.anchor = GridBagConstraints.SOUTHWEST;
 		gbc_lblSubtitulo.insets = new Insets(0, 0, 0, 5);
-		gbc_lblSubtitulo.gridx = 1;
+		gbc_lblSubtitulo.gridx = 2;
 		gbc_lblSubtitulo.gridy = 1;
 		cabecalho.add(lblSubtitulo, gbc_lblSubtitulo);
 
@@ -144,7 +148,7 @@ public abstract class CabecalhoCliente extends JFrame {
 		panel.setForeground(Color.GRAY);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 2;
+		gbc_panel.gridx = 3;
 		gbc_panel.gridy = 1;
 		cabecalho.add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
@@ -218,11 +222,11 @@ public abstract class CabecalhoCliente extends JFrame {
 		gbc_lblSaldo.gridy = 2;
 		panel.add(lblSaldo, gbc_lblSaldo);
 
-		// populaTelaInfConta(conta);
+		populaTelaInfConta(conta);
 
 	}
 
-	private void populaTelaInfConta(Conta conta) {
+	protected static void populaTelaInfConta(Conta conta) {
 		lblSaldo.setText(String.valueOf(conta.getSaldo()));
 		lblNumConta.setText(conta.getNumeroConta());
 		lblAgencia.setText(conta.getAgencia());

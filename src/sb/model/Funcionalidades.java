@@ -8,12 +8,14 @@ public interface Funcionalidades {
 
 	public void deposito(Conta conta, BigDecimal valorDeposito);
 
-	public void saque(Conta conta, BigDecimal valorSaque);
+	public boolean saque(Conta conta, BigDecimal valorSaque, String senhaInformada);
 
-	public void transferencia(Conta conta, Conta contaRecebeTransf, BigDecimal valorTransf);
-
-	public void pagamento(Conta conta, BigDecimal valorPagam);
+	public boolean transferencia(Conta conta, Conta contaRecebeTransf, BigDecimal valorTransf);
 
 	public void finalizarConta(Conta conta);
+	
+	public void contaAlterada(Conta conta);
+
+	boolean pagamento(Conta conta, BigDecimal valorPagamento, String codigoDeBarras);
 
 }

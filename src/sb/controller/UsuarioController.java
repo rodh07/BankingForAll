@@ -3,12 +3,12 @@ package sb.controller;
 import java.util.List;
 
 import sb.classificacoes.ClassificacaoUsuario;
+import sb.dao.UsuarioDao;
 import sb.model.Command;
 import sb.model.MD5;
 import sb.model.Sha256;
 import sb.model.Usuario;
 
-import br.univel.dao.UsuarioDao;
 
 public class UsuarioController {
 

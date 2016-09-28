@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import sb.view.PopupConta;
+
 public class MainBancario extends CabecalhoBancario {
 
 	private JPanel contentPane;
@@ -56,6 +58,14 @@ public class MainBancario extends CabecalhoBancario {
 		panel.setLayout(gbl_panel);
 
 		JButton btnInfo = new JButton("1 - Informa\u00E7\u00F5es de Contas");
+		btnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				PopupConta popUp = new PopupConta();
+				popUp.setLocationRelativeTo(MainBancario.this);
+				popUp.setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_btnInfo = new GridBagConstraints();
 		gbc_btnInfo.fill = GridBagConstraints.BOTH;
 		gbc_btnInfo.insets = new Insets(0, 0, 5, 5);

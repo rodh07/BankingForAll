@@ -4,14 +4,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import sb.classificacoes.ClassificacaoUsuario;
+import sb.dao.ProfissionalDao;
+import sb.dao.UsuarioDao;
 import sb.model.Command;
 import sb.model.MD5;
 import sb.model.Profissional;
 import sb.model.Sha256;
 import sb.model.Usuario;
 
-import br.univel.dao.ProfissionalDao;
-import br.univel.dao.UsuarioDao;
 
 public class ProfissionalController {
 

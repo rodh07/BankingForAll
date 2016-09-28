@@ -10,12 +10,14 @@ import sb.classificacoes.ClassificacaoUsuario;
 import sb.model.Command;
 import sb.model.Conta;
 import sb.model.Funcionalidades;
+import sb.model.Movimentacao;
 import sb.model.Sha256;
 import sb.model.Usuario;
 
-import br.univel.dao.AgenciaDao;
-import br.univel.dao.ContaDao;
-import br.univel.dao.UsuarioDao;
+import sb.dao.AgenciaDao;
+import sb.dao.ContaDao;
+import sb.dao.UsuarioDao;
+import sb.model.Movimentacao;
 
 public class ContaController implements Funcionalidades {
 
@@ -31,23 +33,19 @@ public class ContaController implements Funcionalidades {
 			Command commandSenha = new Sha256(conta.getAcesso());
 			String senhaAcessoHash = commandSenha.execute();
 
-			Usuario usuario = new Usuario(userAcessoHash, senhaAcessoHash, ClassificacaoUsuario.CLIENTE);
+			Usuario usuario = new Usuario(userAcessoHash, senhaAcessoHash,
+					ClassificacaoUsuario.CLIENTE);
 
 			conta.setUsuarioAcesso(userAcessoHash);
 			conta.setAcesso(senhaAcessoHash);
 
-			try {
-
-				new ContaDao().add(conta);
-				new UsuarioDao().add(usuario);
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			new ContaDao().add(conta);
+			new UsuarioDao().add(usuario);
 
 		} else {
-			String mensagem = "Agï¿½ncia " + conta.getAgencia() + " inexistente!!!";
-			JOptionPane.showMessageDialog(null, mensagem, "Atenï¿½ï¿½o", JOptionPane.ERROR_MESSAGE);
+			String mensagem = "AG: " + conta.getAgencia() + " não existe!";
+			JOptionPane.showMessageDialog(null, mensagem, "Atencao",
+					JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -70,44 +68,64 @@ public class ContaController implements Funcionalidades {
 
 	public Conta getContaDeposito(String agencia, String numero, String titular) {
 
-		return new ContaDao().getContaDeposito(agencia, numero, titular);
+		return new ContaDao().getConta(agencia, numero, titular);
 	}
 
 	@Override
 	public void deposito(Conta conta, BigDecimal valorDeposito) {
 
-		conta = new ContaDao().getContaDeposito(conta.getAgencia(), conta.getNumeroConta(), conta.getNome());
+		conta = new ContaDao().getConta(conta.getAgencia(),
+				conta.getNumeroConta(), conta.getNome());
 
 		if (conta.getId() == null) {
-			JOptionPane.showMessageDialog(null, "Conta nï¿½o localizada. Verifique!", "Atenï¿½ï¿½o",
+			JOptionPane.showMessageDialog(null,
+					"Conta nao localizada. Verifique!", "Erro!",
 					JOptionPane.WARNING_MESSAGE);
 		} else {
-
 
 		}
 	}
 
 	@Override
-	public void saque(Conta conta, BigDecimal valorSaque) {
+	public boolean saque(Conta conta, BigDecimal valorSaque,
+			String senhaInformada) {
 
-		
-		
-		
-	}
-
-	@Override
-	public void transferencia(Conta conta, Conta contaRecebeTransf, BigDecimal valorTransf) {
+		return new Movimentacao().saque(conta, valorSaque, senhaInformada);
 
 	}
 
 	@Override
-	public void pagamento(Conta conta, BigDecimal valorPagam) {
+	public boolean transferencia(Conta conta, Conta contaRecebeTransf,
+			BigDecimal valorTransf) {
 
+		return new Movimentacao().transferencia(conta, contaRecebeTransf,
+				valorTransf);
+	}
+
+	@Override
+	public boolean pagamento(Conta conta, BigDecimal valorPagam,
+			String codigoDeBarras) {
+
+		return new Movimentacao().pagamento(conta, valorPagam, codigoDeBarras);
 	}
 
 	@Override
 	public void finalizarConta(Conta conta) {
 
+		new Movimentacao().finalizarConta(conta);
 	}
 
+	@Override
+	public void contaAlterada(Conta conta) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public Conta openBancario(String agencia, String numeroConta,
+			String tipoConta, String titular) {
+
+		Conta conta = new ContaDao().getConta(agencia, numeroConta, titular);
+
+		return conta;
+	}
 }
