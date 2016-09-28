@@ -2,7 +2,7 @@ package sb.view;
 
 import javax.swing.JPanel;
 
-import sb.classificacoes.tipoOperacao;
+import sb.classificacoes.TipoOperacao;
 import sb.model.Conta;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -21,17 +21,17 @@ public class ConfirmacaoOperacao extends CabecalhoCliente {
 	private JPanel contentPane;
 	private JLabel lblValor;
 	private JLabel lblOperacao;
-	private tipoOperacao operacao;
+	private TipoOperacao operacao;
 	private BigDecimal vlrOperacao;
 
-	public ConfirmacaoOperacao(final Conta conta, tipoOperacao operacao,
+	public ConfirmacaoOperacao(final Conta conta, TipoOperacao operacao,
 			BigDecimal vlrOperacao) {
 		super(conta);
 		this.operacao = operacao;
 		this.vlrOperacao = vlrOperacao;
 		setResizable(false);
 		setLocationRelativeTo(null);
-		setTitle("Operação " + operacao.getTipoDeOperacao()
+		setTitle("Operaï¿½ï¿½o " + operacao.getTipoDeOperacao()
 				+ " realizada com sucesso");
 		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane()
 				.getLayout();
@@ -105,7 +105,7 @@ public class ConfirmacaoOperacao extends CabecalhoCliente {
 	
 	private void setInformacoes() {
 
-		lblOperacao.setText("Operação " + operacao.getTipoDeOperacao()
+		lblOperacao.setText("Operaï¿½ï¿½o " + operacao.getTipoDeOperacao()
 				+ " realizada com sucesso");
 		lblValor.setText(NumberFormat.getCurrencyInstance().format(vlrOperacao));
 	}

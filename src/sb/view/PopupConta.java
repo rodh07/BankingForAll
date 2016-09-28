@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -22,6 +23,8 @@ import javax.swing.text.MaskFormatter;
 
 import sb.controller.ContaController;
 import sb.model.Conta;
+
+import java.awt.Font;
 
 public class PopupConta extends JFrame {
 
@@ -31,12 +34,12 @@ public class PopupConta extends JFrame {
 	private JTextField txtTitular;
 
 	public PopupConta() {
-		setTitle("Seleção de conta");
+		setTitle("Popup Conta");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage("./Imagens/Icone.png"));
-		setBounds(100, 100, 274, 225);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				"C:\\Users\\Seven\\git\\BankingForAll\\Icones\\Play.png"));
+		setBounds(100, 100, 274, 254);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -46,15 +49,15 @@ public class PopupConta extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 27, 82, 116, 0, 0 };
-		gbl_panel.rowHeights = new int[] { 17, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panel.rowHeights = new int[] { 17, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, Double.MIN_VALUE };
+				0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
-		JLabel lblAg = new JLabel("AG");
-		lblAg.setForeground(new Color(0, 0, 205));
+		JLabel lblAg = new JLabel("Agencia");
+		lblAg.setForeground(Color.BLACK);
 		GridBagConstraints gbc_lblAg = new GridBagConstraints();
 		gbc_lblAg.anchor = GridBagConstraints.WEST;
 		gbc_lblAg.insets = new Insets(0, 0, 5, 5);
@@ -63,7 +66,7 @@ public class PopupConta extends JFrame {
 		panel.add(lblAg, gbc_lblAg);
 
 		JLabel lblConta = new JLabel("Conta");
-		lblConta.setForeground(new Color(0, 0, 205));
+		lblConta.setForeground(Color.BLACK);
 		GridBagConstraints gbc_lblConta = new GridBagConstraints();
 		gbc_lblConta.anchor = GridBagConstraints.WEST;
 		gbc_lblConta.insets = new Insets(0, 0, 5, 5);
@@ -98,7 +101,7 @@ public class PopupConta extends JFrame {
 		}
 
 		JLabel lblTipoConta = new JLabel("Tipo Conta");
-		lblTipoConta.setForeground(new Color(0, 0, 205));
+		lblTipoConta.setForeground(Color.BLACK);
 		GridBagConstraints gbc_lblTipoConta = new GridBagConstraints();
 		gbc_lblTipoConta.anchor = GridBagConstraints.WEST;
 		gbc_lblTipoConta.insets = new Insets(0, 0, 5, 5);
@@ -106,8 +109,9 @@ public class PopupConta extends JFrame {
 		gbc_lblTipoConta.gridy = 3;
 		panel.add(lblTipoConta, gbc_lblTipoConta);
 
-		final JComboBox cmbTipoConta = new JComboBox(sb.classificacoes.TipoConta.values());
-		cmbTipoConta.setForeground(new Color(0, 0, 205));
+		final JComboBox cmbTipoConta = new JComboBox(
+				sb.classificacoes.TipoConta.values());
+		cmbTipoConta.setForeground(Color.BLACK);
 		GridBagConstraints gbc_cmbTipoConta = new GridBagConstraints();
 		gbc_cmbTipoConta.insets = new Insets(0, 0, 5, 5);
 		gbc_cmbTipoConta.gridwidth = 2;
@@ -117,7 +121,7 @@ public class PopupConta extends JFrame {
 		panel.add(cmbTipoConta, gbc_cmbTipoConta);
 
 		JLabel lblTitular = new JLabel("Titular");
-		lblTitular.setForeground(new Color(0, 0, 205));
+		lblTitular.setForeground(Color.BLACK);
 		GridBagConstraints gbc_lblTitular = new GridBagConstraints();
 		gbc_lblTitular.anchor = GridBagConstraints.WEST;
 		gbc_lblTitular.insets = new Insets(0, 0, 5, 5);
@@ -135,33 +139,34 @@ public class PopupConta extends JFrame {
 		panel.add(txtTitular, gbc_txtTitular);
 		txtTitular.setColumns(10);
 
-		JButton btnConfirme = new JButton("Confirme");
-		btnConfirme.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton btnSelecaoConta = new JButton("Selecionar Conta");
+		btnSelecaoConta.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnSelecaoConta.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
 
-				String agencia = txtAgencia.getText().replace("-", "");
-				String numeroConta = txtConta.getText().replace("-", "");
-				String tipoConta = cmbTipoConta.getSelectedItem().toString();
-				String titular = txtTitular.getText().trim();
+			String agencia = txtAgencia.getText().replace("-", "");
+			String numeroConta = txtConta.getText().replace("-", "");
+			String tipoConta = cmbTipoConta.getSelectedItem().toString();
+			String titular = txtTitular.getText().trim();
 
-				Conta conta = new ContaController().openBancario(agencia,
+			Conta conta = new ContaController().contaBancario(agencia,
 						numeroConta, tipoConta, titular);
-
-				if (conta != null) {
-					new MainCliente(conta).setVisible(true);
-				}
-
+			if (conta != null) {
+			new MainCliente(conta).setVisible(true);
+			}else{
+				JOptionPane.showMessageDialog(null, "Erro na selecao da conta!");
+			}
 			}
 		});
-		btnConfirme.setForeground(new Color(0, 0, 205));
-		GridBagConstraints gbc_btnConfirme = new GridBagConstraints();
-		gbc_btnConfirme.gridwidth = 2;
-		gbc_btnConfirme.insets = new Insets(0, 0, 0, 5);
-		gbc_btnConfirme.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnConfirme.gridx = 1;
-		gbc_btnConfirme.gridy = 7;
-		panel.add(btnConfirme, gbc_btnConfirme);
-
+		btnSelecaoConta.setForeground(Color.BLACK);
+		GridBagConstraints gbc_btnSelecaoConta = new GridBagConstraints();
+		gbc_btnSelecaoConta.gridheight = 2;
+		gbc_btnSelecaoConta.gridwidth = 2;
+		gbc_btnSelecaoConta.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSelecaoConta.fill = GridBagConstraints.BOTH;
+		gbc_btnSelecaoConta.gridx = 1;
+		gbc_btnSelecaoConta.gridy = 7;
+		panel.add(btnSelecaoConta, gbc_btnSelecaoConta);
 	}
 
 }

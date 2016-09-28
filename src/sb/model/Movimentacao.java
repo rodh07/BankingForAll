@@ -37,7 +37,6 @@ public class Movimentacao implements Funcionalidades {
 		new ContaDao().updateSaldo(conta, vlrAtualizar);
 
 		notifyObservers(conta);
-
 	}
 
 	@Override
@@ -60,8 +59,8 @@ public class Movimentacao implements Funcionalidades {
 		} else {
 			JOptionPane.showMessageDialog(
 					null,
-					"Saldo insuficiente para saque! Seu saldo é de R$ "
-							+ conta.getSaldo(), "Atenção",
+					"Saldo insuficiente para saque! Seu saldo ï¿½ de R$ "
+							+ conta.getSaldo(), "Atenï¿½ï¿½o",
 					JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
@@ -94,8 +93,8 @@ public class Movimentacao implements Funcionalidades {
 			return true;
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"Saldo insuficiente para transferência! Seu saldo é de R$ "
-							+ conta.getSaldo(), "Atenção",
+					"Saldo insuficiente para transferï¿½ncia! Seu saldo ï¿½ de R$ "
+							+ conta.getSaldo(), "Atenï¿½ï¿½o",
 					JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
@@ -132,8 +131,8 @@ public class Movimentacao implements Funcionalidades {
 
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"Saldo insuficiente para pagamento! Seu saldo é de R$ "
-							+ conta.getSaldo(), "Atenção",
+					"Saldo insuficiente para pagamento! Seu saldo ï¿½ de R$ "
+							+ conta.getSaldo(), "Atenï¿½ï¿½o",
 					JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
@@ -150,7 +149,7 @@ public class Movimentacao implements Funcionalidades {
 
 			JOptionPane.showMessageDialog(null, "Sua " + conta.getTipoConta()
 					+ " possui saldo de: " + conta.getSaldo()
-					+ ". Impossível inativar");
+					+ ". Impossï¿½vel inativar");
 
 			notifyObservers(conta);
 

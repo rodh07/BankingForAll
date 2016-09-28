@@ -4,7 +4,7 @@ import sb.model.Bancario;
 
 public class BancarioController {
 
-	public void addBancario(Bancario bancario) {
+	public void adicionarBancario(Bancario bancario) {
 
 	}
 

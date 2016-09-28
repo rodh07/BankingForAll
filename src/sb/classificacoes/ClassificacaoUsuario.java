@@ -7,11 +7,7 @@ public enum ClassificacaoUsuario {
 	BANCARIO(1);
 
 	private Integer numeracao;
-
-	private ClassificacaoUsuario(Integer numeracao) {
-		this.numeracao = numeracao;
-	}
-
+	
 	public Integer getNumeracao() {
 		return numeracao;
 	}
@@ -20,4 +16,7 @@ public enum ClassificacaoUsuario {
 		this.numeracao = numeracao;
 	}
 
+	private ClassificacaoUsuario(Integer numeracao) {
+		this.numeracao = numeracao;
+	}
 }

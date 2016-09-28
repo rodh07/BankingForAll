@@ -8,12 +8,17 @@ import javax.swing.table.AbstractTableModel;
 
 public class ListaAgenciaModel extends AbstractTableModel {
 
-	List<Agencia> agencias = new ArrayList<>();
+	List<Agencia> listaAgencias = new ArrayList<>();
 
 	public ListaAgenciaModel(final List<Agencia> agencias) {
-		this.agencias = agencias;
+		this.listaAgencias = agencias;
 	}
 
+	public void inclusao(List<Agencia> listaAgencias) {
+		this.listaAgencias = listaAgencias;
+		fireTableDataChanged();
+	}
+	
 	@Override
 	public int getColumnCount() {
 		return 3;
@@ -21,13 +26,13 @@ public class ListaAgenciaModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return this.agencias.size();
+		return this.listaAgencias.size();
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 
-		final Agencia agencia = this.agencias.get(rowIndex);
+		final Agencia agencia = this.listaAgencias.get(rowIndex);
 
 		switch (columnIndex) {
 		case -1:
@@ -45,25 +50,21 @@ public class ListaAgenciaModel extends AbstractTableModel {
 		}
 	}
 
-	public void incluir(List<Agencia> agencia) {
-		this.agencias = agencia;
-		fireTableDataChanged();
-	}
 
 	@Override
-	public String getColumnName(int col) {
+	public String getColumnName(int coluna) {
 
-		switch (col) {
+		switch (coluna) {
 		case 0:
-			return "Ag�ncia";
+			return "Agencia";
 		case 1:
-			return "N�mero";
+			return "Numero";
 		case 2:
 			return "Cidade";
 		case 3:
 			return "";
 		default:
-			return "Erro";
+			return "XXX";
 		}
 	}
 

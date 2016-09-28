@@ -97,7 +97,7 @@ public class ListarAgencia extends CabecalhoBancario implements WindowListener {
 
 	private void preencheTela() {
 		try {
-			agencias = new AgenciaController().buscarAgencias();
+			agencias = new AgenciaController().agencias();
 			model = new ListaAgenciaModel(agencias);
 			tblAgencia.setModel(model);
 		} catch (SQLException e) {

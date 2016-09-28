@@ -2,7 +2,7 @@ package abstractFactoryInfo;
 
 import java.text.NumberFormat;
 
-import sb.classificacoes.tipoOperacao;
+import sb.classificacoes.TipoOperacao;
 import sb.view.ConfirmacaoOperacao;
 
 public class Informacoes {
@@ -10,7 +10,7 @@ public class Informacoes {
 	
 	/*private void setInformacoes() {
 
-		lblOperacao.setText("Operação " + operacao.getTipoDeOperacao()
+		lblOperacao.setText("Operaï¿½ï¿½o " + operacao.getTipoDeOperacao()
 				+ " realizada com sucesso");
 		lblValor.setText(NumberFormat.getCurrencyInstance().format(vlrOperacao));
 	}

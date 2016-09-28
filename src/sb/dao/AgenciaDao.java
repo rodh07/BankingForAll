@@ -21,7 +21,7 @@ public class AgenciaDao {
 	private static String SQL_SELECT_ALL = "SELECT * FROM AGENCIA ORDER BY ID";
 	private static String SQL_INSERT = "INSERT INTO AGENCIA (NOME, NUMERO, CIDADE) VALUES (?,?,?)";
 
-	public void adicionaAgencia(Agencia agencia) throws SQLException {
+	public void adicionarAgencia(Agencia agencia) throws SQLException {
 
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -58,7 +58,7 @@ public class AgenciaDao {
 
 	}
 
-	public List<Agencia> buscarAgencias() throws SQLException {
+	public List<Agencia> agencias() throws SQLException {
 
 		List<Agencia> agencia = new ArrayList<>();
 		Connection con = null;

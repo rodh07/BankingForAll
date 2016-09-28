@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
 import sb.view.CabecalhoCliente;
-import sb.classificacoes.tipoOperacao;
+import sb.classificacoes.TipoOperacao;
 import sb.view.Teclado;
 import sb.model.Conta;
 import java.awt.event.ActionListener;
@@ -58,7 +58,7 @@ public class RealizarSaque extends CabecalhoCliente {
 			public void actionPerformed(ActionEvent e) {
 
 				Teclado teclado = new Teclado(conta, new BigDecimal(50.00),
-						null, tipoOperacao.SAQUE, null);
+						null, TipoOperacao.SAQUE, null);
 				teclado.setVisible(true);
 			}
 		});
@@ -74,7 +74,7 @@ public class RealizarSaque extends CabecalhoCliente {
 			public void actionPerformed(ActionEvent e) {
 
 				Teclado teclado = new Teclado(conta, new BigDecimal(100.00),
-						null, tipoOperacao.SAQUE, null);
+						null, TipoOperacao.SAQUE, null);
 				teclado.setVisible(true);
 			}
 		});
@@ -91,7 +91,7 @@ public class RealizarSaque extends CabecalhoCliente {
 			public void actionPerformed(ActionEvent e) {
 
 				Teclado teclado = new Teclado(conta, new BigDecimal(200.00),
-						null, tipoOperacao.SAQUE, null);
+						null, TipoOperacao.SAQUE, null);
 				teclado.setVisible(true);
 			}
 		});
@@ -107,7 +107,7 @@ public class RealizarSaque extends CabecalhoCliente {
 			public void actionPerformed(ActionEvent e) {
 
 				Teclado teclado = new Teclado(conta, new BigDecimal(300.00),
-						null, tipoOperacao.SAQUE, null);
+						null, TipoOperacao.SAQUE, null);
 				teclado.setVisible(true);
 			}
 		});
@@ -123,7 +123,7 @@ public class RealizarSaque extends CabecalhoCliente {
 			public void actionPerformed(ActionEvent e) {
 
 				Teclado teclado = new Teclado(conta, new BigDecimal(500.00),
-						null, tipoOperacao.SAQUE, null);
+						null, TipoOperacao.SAQUE, null);
 				teclado.setVisible(true);
 			}
 		});
@@ -172,7 +172,7 @@ public class RealizarSaque extends CabecalhoCliente {
 				} else {
 					new Teclado(conta, new BigDecimal(txtValor.getText()
 							.replace(".", "").replace(",", ".").toString()),
-							null, tipoOperacao.SAQUE, null).setVisible(true);
+							null, TipoOperacao.SAQUE, null).setVisible(true);
 				}
 			}
 		});

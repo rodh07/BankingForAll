@@ -7,13 +7,17 @@ import javax.swing.table.AbstractTableModel;
 
 public class ListaClienteModel extends AbstractTableModel {
 
-	List<Conta> contas = new ArrayList<>();
+	List<Conta> listaContas = new ArrayList<>();
 
 	public ListaClienteModel(List<Conta> contas) {
-		this.contas = contas;
-
+		this.listaContas = contas;
 	}
 
+	public void incluir(List<Conta> contas) {
+		this.listaContas = contas;
+		fireTableDataChanged();
+	}
+	
 	@Override
 	public int getColumnCount() {
 		return 5;
@@ -21,13 +25,13 @@ public class ListaClienteModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return this.contas.size();
+		return this.listaContas.size();
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 
-		final Conta conta = this.contas.get(rowIndex);
+		final Conta conta = this.listaContas.get(rowIndex);
 
 		switch (columnIndex) {
 		case -1:
@@ -46,13 +50,11 @@ public class ListaClienteModel extends AbstractTableModel {
 		default:
 			return "Erro";
 		}
-
 	}
-
 	@Override
-	public String getColumnName(int column) {
+	public String getColumnName(int coluna) {
 
-		switch (column) {
+		switch (coluna) {
 		case 0:
 			return "Nome";
 		case 1:
@@ -60,19 +62,12 @@ public class ListaClienteModel extends AbstractTableModel {
 		case 2:
 			return "CPF";
 		case 3:
-			return "Agência";
+			return "Agencia";
 		case 4:
 			return "Tipo Conta";
-
 		default:
-			return "Erro";
+			return "XXX";
 		}
 
 	}
-
-	public void incluir(List<Conta> contas) {
-		this.contas = contas;
-		fireTableDataChanged();
-	}
-
 }

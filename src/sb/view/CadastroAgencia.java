@@ -137,7 +137,7 @@ public class CadastroAgencia extends CabecalhoBancario implements
 				} else if (sql.equals("update")) {
 					final Agencia agencia = new Agencia(idAgencia, nomeAgenc,
 							numero, cidade);
-					new AgenciaController().edit(agencia);
+					new AgenciaController().editar(agencia);
 					sql = "";
 					limparCampos();
 				} else {

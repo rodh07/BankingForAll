@@ -38,15 +38,11 @@ public class OperacaoConfirmada extends CabecalhoCliente {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		try {
 			OperacaoConfirmada dialog = new OperacaoConfirmada(null);

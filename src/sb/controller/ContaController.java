@@ -3,9 +3,7 @@ package sb.controller;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import sb.classificacoes.ClassificacaoUsuario;
 import sb.model.Command;
 import sb.model.Conta;
@@ -13,7 +11,6 @@ import sb.model.Funcionalidades;
 import sb.model.Movimentacao;
 import sb.model.Sha256;
 import sb.model.Usuario;
-
 import sb.dao.AgenciaDao;
 import sb.dao.ContaDao;
 import sb.dao.UsuarioDao;
@@ -23,10 +20,11 @@ public class ContaController implements Funcionalidades {
 
 	public void add(Conta conta) {
 
-		Integer agExiste = new AgenciaDao().getNumero(conta.getAgencia());
+		Integer agencia_existente = new AgenciaDao().getNumero(conta.getAgencia());
 
-		if (agExiste > 0) {
+		if (agencia_existente > 0) {
 
+			//utilização do padrão de projeto command para gerar usuario e senha
 			Command commandUser = new Sha256(conta.getUsuarioAcesso());
 			String userAcessoHash = commandUser.execute();
 
@@ -43,15 +41,12 @@ public class ContaController implements Funcionalidades {
 			new UsuarioDao().add(usuario);
 
 		} else {
-			String mensagem = "AG: " + conta.getAgencia() + " n�o existe!";
-			JOptionPane.showMessageDialog(null, mensagem, "Atencao",
+			String mensagem = "Agencia: " + conta.getAgencia() + " nao existente!";
+			JOptionPane.showMessageDialog(null, mensagem, "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
-
 	}
-
 	public List<Conta> buscarContas() throws SQLException {
-
 		return new ContaDao().buscarContas();
 	}
 
@@ -105,7 +100,6 @@ public class ContaController implements Funcionalidades {
 	@Override
 	public boolean pagamento(Conta conta, BigDecimal valorPagam,
 			String codigoDeBarras) {
-
 		return new Movimentacao().pagamento(conta, valorPagam, codigoDeBarras);
 	}
 
@@ -115,17 +109,17 @@ public class ContaController implements Funcionalidades {
 		new Movimentacao().finalizarConta(conta);
 	}
 
+	public Conta contaBancario(String agencia, String numeroConta,
+			String tipoConta, String titular) {
+
+		Conta conta = new ContaDao().getConta(agencia, numeroConta, titular);
+		return conta;
+	}
 	@Override
 	public void contaAlterada(Conta conta) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public Conta openBancario(String agencia, String numeroConta,
-			String tipoConta, String titular) {
-
-		Conta conta = new ContaDao().getConta(agencia, numeroConta, titular);
-
-		return conta;
-	}
+	
 }
