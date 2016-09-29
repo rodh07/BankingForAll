@@ -2,8 +2,6 @@ package sb.model;
 
 import java.math.BigDecimal;
 
-
-
 public interface Funcionalidades {
 
 	public void deposito(Conta conta, BigDecimal valorDeposito);

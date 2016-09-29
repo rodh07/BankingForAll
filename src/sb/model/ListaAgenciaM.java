@@ -51,8 +51,6 @@ public class ListaAgenciaM extends AbstractTableModel {
 			return "Erro";
 		}
 	}
-
-
 	@Override
 	public String getColumnName(int coluna) {
 

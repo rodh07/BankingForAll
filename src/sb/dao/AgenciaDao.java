@@ -12,12 +12,11 @@ import javax.swing.JOptionPane;
 
 import sb.model.Agencia;
 
-
 public class AgenciaDao {
 
 	private static String SQL_SELECT_AGENCIA = "SELECT COUNT(*) FROM AGENCIA WHERE NUMERO = ?";
-	private static String SQL_GET_AGENCI_ID = "SELECT * FROM AGENCIA WHERE ID = ?";
 	private static String SQL_UPDATE = "UPDATE AGENCIA SET NOME = ?, NUMERO = ?, CIDADE = ? WHERE ID = ?";
+	private static String SQL_GETAGENCIAID_ = "SELECT * FROM AGENCIA WHERE ID = ?";
 	private static String SQL_SELECT_ALL = "SELECT * FROM AGENCIA ORDER BY ID";
 	private static String SQL_INSERT = "INSERT INTO AGENCIA (NOME, NUMERO, CIDADE) VALUES (?,?,?)";
 
@@ -29,18 +28,21 @@ public class AgenciaDao {
 
 		try {
 			con = Conexao.getConnection();
-			stmt = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
+			stmt = con.prepareStatement(SQL_INSERT,
+					Statement.RETURN_GENERATED_KEYS);
 			writeStatement(agencia, stmt);
 
 			int newLinhas = stmt.executeUpdate();
 
 			if (newLinhas == 0)
-				throw new RuntimeException("Falha ao inserir dados na tabela Agencia");
+				throw new RuntimeException(
+						"Falha ao inserir dados na tabela Agencia");
 
 			rs = stmt.getGeneratedKeys();
 			rs.next();
 			agencia.setId(rs.getInt(1));
-			JOptionPane.showMessageDialog(null, "Ag�ncia inserida com sucesso!!!");
+			JOptionPane.showMessageDialog(null,
+					"Ag�ncia inserida com sucesso!!!");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -50,7 +52,8 @@ public class AgenciaDao {
 
 	}
 
-	private void writeStatement(Agencia agencia, PreparedStatement stmt) throws SQLException {
+	private void writeStatement(Agencia agencia, PreparedStatement stmt)
+			throws SQLException {
 
 		stmt.setString(1, agencia.getNome());
 		stmt.setString(2, agencia.getNumeroAgencia());
@@ -84,7 +87,8 @@ public class AgenciaDao {
 		return agencia;
 	}
 
-	private void close(ResultSet rs, PreparedStatement stmt, Connection con) throws SQLException {
+	private void close(ResultSet rs, PreparedStatement stmt, Connection con)
+			throws SQLException {
 		if (rs != null && !rs.isClosed())
 			rs.close();
 		if (stmt != null && !stmt.isClosed())
@@ -112,7 +116,7 @@ public class AgenciaDao {
 
 			con = Conexao.getConnection();
 
-			stmt = con.prepareStatement(SQL_GET_AGENCI_ID);
+			stmt = con.prepareStatement(SQL_GETAGENCIAID_);
 			stmt.setInt(1, idAgencia);
 
 			rs = stmt.executeQuery();
@@ -140,9 +144,11 @@ public class AgenciaDao {
 			int newLinhas = stmt.executeUpdate();
 
 			if (newLinhas == 0)
-				throw new RuntimeException("Falha ao inserir dados na tabela Agencia");
+				throw new RuntimeException(
+						"Falha ao inserir dados na tabela Agencia");
 
-			JOptionPane.showMessageDialog(null, "Ag�ncia atualizada com sucesso!!!");
+			JOptionPane.showMessageDialog(null,
+					"Ag�ncia atualizada com sucesso!!!");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -166,7 +172,6 @@ public class AgenciaDao {
 			if (rs.next()) {
 				newAgencias = rs.getInt(1);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

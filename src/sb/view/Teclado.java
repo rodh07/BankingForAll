@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import sb.model.Movimentacao;
 import sb.classificacoes.TipoOperacao;
 import sb.controller.ContaController;
 import sb.view.OperacaoConfirmada;
@@ -27,12 +26,13 @@ public class Teclado extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private StringBuilder senhaTeclado;
+	private JPanel contentPane;
 	private JTextField txtSenhaOperacao;
 	private Teclado teclado;
 
 
-	public Teclado(final Conta conta, final BigDecimal valor, final Conta contaTransferir, final TipoOperacao operacao, final String codigoBarras,
-			Movimentacao movimentacao) {
+	public Teclado(Conta conta, BigDecimal valor, Conta contaTransferir,
+			TipoOperacao operacao, String codBarras) {
 		setSize(176, 238);
 		setTitle("Senha");
 		teclado = this;
@@ -73,12 +73,6 @@ public class Teclado extends JFrame {
 		txtSenhaOperacao.requestFocus();
 
 		JButton btnSete = new JButton("7");
-		btnSete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				senhaTeclado.append("7");
-				SetarNumero(senhaTeclado);
-			}
-		});
 		GridBagConstraints gbc_btnSete = new GridBagConstraints();
 		gbc_btnSete.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnSete.insets = new Insets(0, 0, 5, 5);
@@ -87,12 +81,6 @@ public class Teclado extends JFrame {
 		panel.add(btnSete, gbc_btnSete);
 
 		JButton btnOito = new JButton("8");
-		btnOito.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				senhaTeclado.append("8");
-				SetarNumero(senhaTeclado);
-			}
-		});
 		GridBagConstraints gbc_btnOito = new GridBagConstraints();
 		gbc_btnOito.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnOito.insets = new Insets(0, 0, 5, 5);
@@ -101,12 +89,6 @@ public class Teclado extends JFrame {
 		panel.add(btnOito, gbc_btnOito);
 
 		JButton btnNove = new JButton("9");
-		btnNove.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				senhaTeclado.append("9");
-				SetarNumero(senhaTeclado);
-			}
-		});
 		GridBagConstraints gbc_btnNove = new GridBagConstraints();
 		gbc_btnNove.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNove.anchor = GridBagConstraints.NORTHWEST;
@@ -115,12 +97,6 @@ public class Teclado extends JFrame {
 		panel.add(btnNove, gbc_btnNove);
 
 		JButton btnQuatro = new JButton("4");
-		btnQuatro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				senhaTeclado.append("4");
-				SetarNumero(senhaTeclado);
-			}
-		});
 		GridBagConstraints gbc_btnQuatro = new GridBagConstraints();
 		gbc_btnQuatro.anchor = GridBagConstraints.WEST;
 		gbc_btnQuatro.insets = new Insets(0, 0, 5, 5);
@@ -129,12 +105,6 @@ public class Teclado extends JFrame {
 		panel.add(btnQuatro, gbc_btnQuatro);
 
 		JButton btnCinco = new JButton("5");
-		btnCinco.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				senhaTeclado.append("5");
-				SetarNumero(senhaTeclado);
-			}
-		});
 		GridBagConstraints gbc_btnCinco = new GridBagConstraints();
 		gbc_btnCinco.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnCinco.insets = new Insets(0, 0, 5, 5);
@@ -143,12 +113,6 @@ public class Teclado extends JFrame {
 		panel.add(btnCinco, gbc_btnCinco);
 
 		JButton btnSeis = new JButton("6");
-		btnSeis.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				senhaTeclado.append("6");
-				SetarNumero(senhaTeclado);
-			}
-		});
 		GridBagConstraints gbc_btnSeis = new GridBagConstraints();
 		gbc_btnSeis.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnSeis.insets = new Insets(0, 0, 5, 5);
@@ -172,13 +136,6 @@ public class Teclado extends JFrame {
 		panel.add(btnUm, gbc_btnUm);
 
 		JButton btnDois = new JButton("2");
-		btnDois.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				senhaTeclado.append("2");
-				SetarNumero(senhaTeclado);
-			}
-		});
 		GridBagConstraints gbc_btnDois = new GridBagConstraints();
 		gbc_btnDois.anchor = GridBagConstraints.WEST;
 		gbc_btnDois.insets = new Insets(0, 0, 5, 5);
@@ -187,13 +144,6 @@ public class Teclado extends JFrame {
 		panel.add(btnDois, gbc_btnDois);
 
 		JButton btnTres = new JButton("3");
-		btnTres.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				senhaTeclado.append("3");
-				SetarNumero(senhaTeclado);
-			}
-		});
 		GridBagConstraints gbc_btnTres = new GridBagConstraints();
 		gbc_btnTres.anchor = GridBagConstraints.WEST;
 		gbc_btnTres.insets = new Insets(0, 0, 5, 5);
@@ -245,33 +195,11 @@ public class Teclado extends JFrame {
 		panel.add(button_1, gbc_button_1);
 
 		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				senhaTeclado = new StringBuilder();
-				senhaTeclado.append(txtSenhaOperacao.getText());
-
-				if (conta.getSenhaOperacoes().equals(senhaTeclado.toString())) {
-
-					switch (operacao) {
-					case SAQUE:
-						validacaoSaque(conta, valor);
-						break;
-					case TRANSFERENCIA:
-						validacaoTransferencia(conta, contaTransferir, valor);
-						break;
-					case PAGAMENTO:
-						validacaoPagamento(conta, valor, operacao, codigoBarras);
-						break;
-					default:
-						break;
-					}
-				}
-			}
-		});
 		GridBagConstraints gbc_btnConfirmar = new GridBagConstraints();
 		gbc_btnConfirmar.gridwidth = 3;
+		gbc_btnConfirmar.anchor = GridBagConstraints.SOUTH;
 		gbc_btnConfirmar.gridheight = 2;
-		gbc_btnConfirmar.fill = GridBagConstraints.BOTH;
+		gbc_btnConfirmar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnConfirmar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnConfirmar.gridx = 2;
 		gbc_btnConfirmar.gridy = 6;

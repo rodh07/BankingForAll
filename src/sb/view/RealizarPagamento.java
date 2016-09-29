@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.DefaultFormatterFactory;
@@ -18,14 +19,14 @@ import javax.swing.text.NumberFormatter;
 
 import sb.classificacoes.TipoOperacao;
 import sb.model.Conta;
+
 import java.awt.Font;
 
 public class RealizarPagamento extends CabecalhoCliente {
 
-	
 	private static final long serialVersionUID = 1L;
-	private JTextField txtCodbarras;
-	private JTextField txtValorPag;
+	public JTextField txtCodbarras;
+	public JTextField txtValorPag;
 
 	public RealizarPagamento(final Conta conta) {
 		super(conta);
@@ -100,15 +101,25 @@ public class RealizarPagamento extends CabecalhoCliente {
 		btnConfirmarPagamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				BigDecimal valorPag = new BigDecimal(txtValorPag.getText()
-						.replace(".", "").replace(",", "."));
+				if (txtValorPag.getText().equals("")
+						|| txtCodbarras.getText().equals("")) {
+					JOptionPane
+							.showMessageDialog(
+									RealizarPagamento.this,
+									"Informe o codigo de barras e o valor do documento.",
+									"Erro", JOptionPane.WARNING_MESSAGE);
+					txtCodbarras.requestFocus();
+				} else {
 
-				txtCodbarras.setText("");
-				txtValorPag.setText("0.00");
+					BigDecimal valorPag = new BigDecimal(txtValorPag.getText()
+							.replace(".", "").replace(",", "."));
 
-				new Teclado(conta, valorPag, null, TipoOperacao.PAGAMENTO,
-						txtCodbarras.getText(), null).setVisible(true);
+					txtCodbarras.setText("");
+					txtValorPag.setText("0.00");
 
+					new Teclado(conta, valorPag, null, TipoOperacao.PAGAMENTO,
+							txtCodbarras.getText(), null).setVisible(true);
+				}
 			}
 		});
 		GridBagConstraints gbc_btnConfirmarPagamento = new GridBagConstraints();
