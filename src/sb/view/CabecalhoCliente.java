@@ -9,67 +9,23 @@ import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-
 import sb.model.Conta;
-//import sb.model.HorarioCorreto;
 import sb.model.Funcionalidades;
 
 
 public abstract class CabecalhoCliente extends JFrame implements Funcionalidades {
 
+	private static final long serialVersionUID = 1L;
 	private static JPanel contentPane;
 	protected static JLabel lblDataAcess;
 	private static JLabel lblAgencia;
 	private static JLabel lblTipoConta;
 	private static JLabel lblNumConta;
 	private static JLabel lblSaldo;
-
-	public JLabel getLblDataAcess() {
-		return lblDataAcess;
-	}
-
-	protected void setLblDataAcess(String lblDataAcess) {
-		this.lblDataAcess.setText(lblDataAcess);
-	}
-
-	public JLabel getLblAgencia() {
-		return lblAgencia;
-	}
-
-	public void setLblAgencia(JLabel lblAgencia) {
-		this.lblAgencia = lblAgencia;
-	}
-
-	public JLabel getLblTipoConta() {
-		return lblTipoConta;
-	}
-
-	public void setLblTipoConta(JLabel lblTipoConta) {
-		this.lblTipoConta = lblTipoConta;
-	}
-
-	public JLabel getLblNumConta() {
-		return lblNumConta;
-	}
-
-	public void setLblNumConta(JLabel lblNumConta) {
-		this.lblNumConta = lblNumConta;
-	}
-
-	public JLabel getLblSaldo() {
-		return lblSaldo;
-	}
-
-	public void setLblSaldo(JLabel lblSaldo) {
-		this.lblSaldo = lblSaldo;
-	}
 
 	public CabecalhoCliente(Conta conta) {
 		setSize(800, 375);
@@ -157,15 +113,15 @@ public abstract class CabecalhoCliente extends JFrame implements Funcionalidades
 		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
-
-		JLabel lblAg = new JLabel("AG:");
-		lblAg.setForeground(Color.BLACK);
-		GridBagConstraints gbc_lblAg = new GridBagConstraints();
-		gbc_lblAg.anchor = GridBagConstraints.WEST;
-		gbc_lblAg.insets = new Insets(0, 0, 5, 5);
-		gbc_lblAg.gridx = 1;
-		gbc_lblAg.gridy = 0;
-		panel.add(lblAg, gbc_lblAg);
+		
+				JLabel lblAg = new JLabel("Agencia:");
+				lblAg.setForeground(Color.BLACK);
+				GridBagConstraints gbc_lblAg = new GridBagConstraints();
+				gbc_lblAg.anchor = GridBagConstraints.EAST;
+				gbc_lblAg.insets = new Insets(0, 0, 5, 5);
+				gbc_lblAg.gridx = 0;
+				gbc_lblAg.gridy = 0;
+				panel.add(lblAg, gbc_lblAg);
 
 		lblAgencia = new JLabel("");
 		lblAgencia.setForeground(Color.BLACK);
@@ -222,10 +178,50 @@ public abstract class CabecalhoCliente extends JFrame implements Funcionalidades
 		gbc_lblSaldo.gridy = 2;
 		panel.add(lblSaldo, gbc_lblSaldo);
 
-		//populaTelaInfConta(conta);
+		populaTelaInfConta(conta);
 
 	}
 
+	public JLabel getLblDataAcess() {
+		return lblDataAcess;
+	}
+
+	protected void setLblDataAcess(String lblDataAcess) {
+		CabecalhoCliente.lblDataAcess.setText(lblDataAcess);
+	}
+
+	public JLabel getLblAgencia() {
+		return lblAgencia;
+	}
+
+	public void setLblAgencia(JLabel lblAgencia) {
+		CabecalhoCliente.lblAgencia = lblAgencia;
+	}
+
+	public JLabel getLblTipoConta() {
+		return lblTipoConta;
+	}
+
+	public void setLblTipoConta(JLabel lblTipoConta) {
+		CabecalhoCliente.lblTipoConta = lblTipoConta;
+	}
+
+	public JLabel getLblNumConta() {
+		return lblNumConta;
+	}
+
+	public void setLblNumConta(JLabel lblNumConta) {
+		CabecalhoCliente.lblNumConta = lblNumConta;
+	}
+
+	public JLabel getLblSaldo() {
+		return lblSaldo;
+	}
+
+	public void setLblSaldo(JLabel lblSaldo) {
+		CabecalhoCliente.lblSaldo = lblSaldo;
+	}
+	
 	protected static void populaTelaInfConta(Conta conta) {
 		lblSaldo.setText(String.valueOf(conta.getSaldo()));
 		lblNumConta.setText(conta.getNumeroConta());
@@ -234,9 +230,8 @@ public abstract class CabecalhoCliente extends JFrame implements Funcionalidades
 	}
 
 	public String HorarioCorreto(){
-		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Calendar calendario = Calendar.getInstance();
-		
-		return dataFormatada.format(calendario.getTime());
+		return dateFormat.format(calendario.getTime());
 	}
 }

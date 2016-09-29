@@ -20,27 +20,27 @@ public class MainBancario extends CabecalhoBancario {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setTitle("Gerencia");
+		setTitle("Administracao Banking For All");
 		GridBagLayout gridBagLayout = (GridBagLayout) getContentPane()
 				.getLayout();
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0 };
 
-		JPanel corpo = new JPanel();
-		GridBagConstraints gbc_corpo = new GridBagConstraints();
-		gbc_corpo.insets = new Insets(0, 0, 0, 5);
-		gbc_corpo.gridheight = 2;
-		gbc_corpo.gridwidth = 3;
-		gbc_corpo.fill = GridBagConstraints.BOTH;
-		gbc_corpo.gridx = 0;
-		gbc_corpo.gridy = 1;
-		getContentPane().add(corpo, gbc_corpo);
-		GridBagLayout gbl_corpo = new GridBagLayout();
-		gbl_corpo.columnWidths = new int[] { 1, 0, 0 };
-		gbl_corpo.rowHeights = new int[] { 1, 0, 0, 0 };
-		gbl_corpo.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
-		gbl_corpo.rowWeights = new double[] { 1.0, 0.0, 0.0, Double.MIN_VALUE };
-		corpo.setLayout(gbl_corpo);
+		JPanel newPainel = new JPanel();
+		GridBagConstraints gbc_newPainel = new GridBagConstraints();
+		gbc_newPainel.insets = new Insets(0, 0, 0, 5);
+		gbc_newPainel.gridheight = 2;
+		gbc_newPainel.gridwidth = 3;
+		gbc_newPainel.fill = GridBagConstraints.BOTH;
+		gbc_newPainel.gridx = 0;
+		gbc_newPainel.gridy = 1;
+		getContentPane().add(newPainel, gbc_newPainel);
+		GridBagLayout gbl_newPainel = new GridBagLayout();
+		gbl_newPainel.columnWidths = new int[] { 1, 0, 0 };
+		gbl_newPainel.rowHeights = new int[] { 1, 0, 0, 0 };
+		gbl_newPainel.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gbl_newPainel.rowWeights = new double[] { 1.0, 0.0, 0.0, Double.MIN_VALUE };
+		newPainel.setLayout(gbl_newPainel);
 
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -49,7 +49,7 @@ public class MainBancario extends CabecalhoBancario {
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 0;
-		corpo.add(panel, gbc_panel);
+		newPainel.add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 279, 243, 0 };
 		gbl_panel.rowHeights = new int[] { 76, 76, 75, 0 };
@@ -57,13 +57,13 @@ public class MainBancario extends CabecalhoBancario {
 		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
-		JButton btnInfo = new JButton("1 - Informa\u00E7\u00F5es de Contas");
-		btnInfo.addActionListener(new ActionListener() {
+		JButton btnPopUpConta = new JButton("1 - Informacoes de Contas");
+		btnPopUpConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				PopupConta popUp = new PopupConta();
-				popUp.setLocationRelativeTo(MainBancario.this);
-				popUp.setVisible(true);
+
+				PopupConta popupConta = new PopupConta();
+				popupConta.setVisible(true);
+				popupConta.setLocationRelativeTo(null);
 			}
 		});
 		GridBagConstraints gbc_btnInfo = new GridBagConstraints();
@@ -71,29 +71,38 @@ public class MainBancario extends CabecalhoBancario {
 		gbc_btnInfo.insets = new Insets(0, 0, 5, 5);
 		gbc_btnInfo.gridx = 0;
 		gbc_btnInfo.gridy = 0;
-		panel.add(btnInfo, gbc_btnInfo);
+		panel.add(btnPopUpConta, gbc_btnInfo);
 
-		JButton btnProfi = new JButton("4 - Profissionais");
-		btnProfi.addActionListener(new ActionListener() {
+		JButton btnProfissional = new JButton("4 - Profissionais");
+		btnProfissional.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				ListarProfissionais listProfissionais = new ListarProfissionais();
-				listProfissionais.setVisible(true);
-
+				ListarProfissionais listarProfissionais = new ListarProfissionais();
+				listarProfissionais.setVisible(true);
+				listarProfissionais.setResizable(false);
 			}
 		});
-		GridBagConstraints gbc_btnProfi = new GridBagConstraints();
-		gbc_btnProfi.fill = GridBagConstraints.BOTH;
-		gbc_btnProfi.insets = new Insets(0, 0, 5, 0);
-		gbc_btnProfi.gridx = 1;
-		gbc_btnProfi.gridy = 0;
-		panel.add(btnProfi, gbc_btnProfi);
+		GridBagConstraints gbc_btnProfissional = new GridBagConstraints();
+		gbc_btnProfissional.fill = GridBagConstraints.BOTH;
+		gbc_btnProfissional.insets = new Insets(0, 0, 5, 0);
+		gbc_btnProfissional.gridx = 1;
+		gbc_btnProfissional.gridy = 0;
+		panel.add(btnProfissional, gbc_btnProfissional);
 
+		JButton btnBalanco = new JButton("5 - Balanco");
+		GridBagConstraints gbc_btnBalanco = new GridBagConstraints();
+		gbc_btnBalanco.fill = GridBagConstraints.BOTH;
+		gbc_btnBalanco.insets = new Insets(0, 0, 5, 0);
+		gbc_btnBalanco.gridx = 1;
+		gbc_btnBalanco.gridy = 1;
+		panel.add(btnBalanco, gbc_btnBalanco);
+		
 		JButton btnNovaConta = new JButton("2 - Nova Conta");
 		btnNovaConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				new CadastroConta().setVisible(true);
+				CadastrarConta cadastrarConta = new CadastrarConta();
+				cadastrarConta.setVisible(true);
+				cadastrarConta.setResizable(false);
 			}
 		});
 		GridBagConstraints gbc_btnNovaConta = new GridBagConstraints();
@@ -103,20 +112,12 @@ public class MainBancario extends CabecalhoBancario {
 		gbc_btnNovaConta.gridy = 1;
 		panel.add(btnNovaConta, gbc_btnNovaConta);
 
-		JButton btnBalanco = new JButton("5 - Balan\u00E7o");
-		GridBagConstraints gbc_btnBalanco = new GridBagConstraints();
-		gbc_btnBalanco.fill = GridBagConstraints.BOTH;
-		gbc_btnBalanco.insets = new Insets(0, 0, 5, 0);
-		gbc_btnBalanco.gridx = 1;
-		gbc_btnBalanco.gridy = 1;
-		panel.add(btnBalanco, gbc_btnBalanco);
-
 		JButton btnClientes = new JButton("3 - Clientes");
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				ListarCliente listaClientes = new ListarCliente();
 				listaClientes.setVisible(true);
+				listaClientes.setResizable(false);
 			}
 		});
 		GridBagConstraints gbc_btnClientes = new GridBagConstraints();
@@ -126,12 +127,12 @@ public class MainBancario extends CabecalhoBancario {
 		gbc_btnClientes.gridy = 2;
 		panel.add(btnClientes, gbc_btnClientes);
 
-		JButton btnAgencias = new JButton("6 - Ag\u00EAncias");
+		JButton btnAgencias = new JButton("6 - Agencias");
 		btnAgencias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				ListarAgencia listaAgen = new ListarAgencia();
-				listaAgen.setVisible(true);
+				ListarAgencia listaAgencia = new ListarAgencia();
+				listaAgencia.setVisible(true);
+				listaAgencia.setResizable(false);
 			}
 		});
 		GridBagConstraints gbc_btnAgencias = new GridBagConstraints();
@@ -139,6 +140,5 @@ public class MainBancario extends CabecalhoBancario {
 		gbc_btnAgencias.gridx = 1;
 		gbc_btnAgencias.gridy = 2;
 		panel.add(btnAgencias, gbc_btnAgencias);
-
 	}
 }

@@ -15,7 +15,7 @@ import javax.swing.JTable;
 
 import sb.controller.ContaController;
 import sb.model.Conta;
-import sb.model.ListaClienteModel;
+import sb.model.ListaClienteM;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -25,7 +25,7 @@ public class ListarCliente extends CabecalhoBancario implements WindowListener {
 	private JPanel contentPane;
 	private JTable tblContas;
 	private List<Conta> contas;
-	private ListaClienteModel model;
+	private ListaClienteM model;
 
 	public ListarCliente() {
 		super();
@@ -53,7 +53,7 @@ public class ListarCliente extends CabecalhoBancario implements WindowListener {
 
 		try {
 			contas = new ContaController().buscarContas();
-			model = new ListaClienteModel(contas);
+			model = new ListaClienteM(contas);
 			tblContas.setModel(model);
 		} catch (SQLException e) {
 			e.printStackTrace();

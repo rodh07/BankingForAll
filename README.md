@@ -1,2 +1,0 @@
-# BankingForAll
-Trabalho sistema bancario

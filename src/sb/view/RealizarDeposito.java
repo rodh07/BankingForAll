@@ -41,7 +41,7 @@ public class RealizarDeposito extends CabecalhoCliente {
 				.getLayout();
 		gridBagLayout.rowWeights = new double[] { 0.0, 1.0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 0.0 };
-		setTitle("Dep�sito");
+		setTitle("Deposito");
 		setLocationRelativeTo(null);
 		setResizable(false);
 

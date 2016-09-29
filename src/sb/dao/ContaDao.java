@@ -1,6 +1,7 @@
 package sb.dao;
 
 import java.math.BigDecimal;
+import java.security.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,12 +9,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
+import sb.dao.Conexao;
+import sb.model.Movimentacao;
+import sb.model.MovimentacaoDados;
 
 import sb.model.Conta;
 
 public class ContaDao {
+
+	Connection con = null;
+	PreparedStatement stmt = null;
+	ResultSet rs = null;
 
 	private static final String SQL_GET_CONTA = "SELECT * FROM CONTA WHERE USUARIOACESSO = ? AND SENHAACESSO = ? AND SITUACAO = 'ATIVO'";
 	private static final String SQL_GET_CONTA_DEPOSITO = "SELECT * FROM CONTA WHERE AGENCIA = ? AND NUMEROCONTA = ? AND NOME = ? AND SITUACAO = 'ATIVO'";
@@ -21,6 +28,8 @@ public class ContaDao {
 	private static final String SQL_SELECT_ALL = "SELECT * FROM CONTA WHERE SITUACAO = 'ATIVO'";
 	private static final String SQL_UPDATE_SALDO_CONTA = "UPDATE CONTA SET SALDO = ? WHERE NUMEROCONTA = ? AND NOME = ?";
 	private static final String SQL_INATIVAR = "UPDATE CONTA SET SITUACAO = 'INATIVO' WHERE ID = ?";
+	private static final String SQL_INSERT_MOVIMENTAO = "INSERT INTO MOVIMENTACAO (OPERACAO, DATA, VALOR) VALUES (?,?,?)";
+	private static final String SQL_SELECT_ALL_MOVIMENTACAO = "SELECT * FROM MOVIMENTACAO ORDER BY ID";
 
 	public void add(Conta conta) {
 		Connection con = null;
@@ -28,7 +37,8 @@ public class ContaDao {
 		ResultSet rs = null;
 		try {
 			con = Conexao.getConnection();
-			stmt = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
+			stmt = con.prepareStatement(SQL_INSERT,
+					Statement.RETURN_GENERATED_KEYS);
 			writeStatemento(conta, stmt);
 
 			int linhasInseridas = stmt.executeUpdate();
@@ -38,8 +48,8 @@ public class ContaDao {
 			rs = stmt.getGeneratedKeys();
 			rs.next();
 			conta.setId(rs.getInt(1));
-			JOptionPane.showMessageDialog(null,
-					conta.getTipoConta() + " " + conta.getNumeroConta() + " inserida com sucesso!!!");
+			JOptionPane.showMessageDialog(null, conta.getTipoConta() + " "
+					+ conta.getNumeroConta() + " inserida com sucesso!!!");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -48,7 +58,8 @@ public class ContaDao {
 		}
 	}
 
-	private void writeStatemento(Conta conta, PreparedStatement stmt) throws SQLException {
+	private void writeStatemento(Conta conta, PreparedStatement stmt)
+			throws SQLException {
 
 		stmt.setString(1, conta.getNome());
 		stmt.setInt(2, conta.getIdade());
@@ -132,8 +143,9 @@ public class ContaDao {
 		BigDecimal saldo = rs.getBigDecimal("saldo");
 		String situacaoBancaria = rs.getString("situacao");
 
-		return new Conta(id, nome, idade, cpf, agencia, tipoConta, usuarioAcesso, senhaAcesso, senhaOperacoes,
-				numeroConta, saldo, situacaoBancaria);
+		return new Conta(id, nome, idade, cpf, agencia, tipoConta,
+				usuarioAcesso, senhaAcesso, senhaOperacoes, numeroConta, saldo,
+				situacaoBancaria);
 	}
 
 	public Conta getConta(String agencia, String numero, String titular) {
@@ -157,7 +169,8 @@ public class ContaDao {
 			}
 
 			if (conta == null) {
-				JOptionPane.showMessageDialog(null, "Conta não localizada!", "Atenção", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Conta não localizada!",
+						"Atenção", JOptionPane.ERROR_MESSAGE);
 			}
 			return conta;
 
@@ -185,18 +198,19 @@ public class ContaDao {
 			if (linhasAtualizadas == 0)
 				throw new RuntimeException("Falha ao realizar operação!!!");
 
-			JOptionPane.showMessageDialog(null, "Saldo atualizado com sucesso!!!");
+			JOptionPane.showMessageDialog(null,
+					"Saldo atualizado com sucesso!!!");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void inativarConta(Conta conta) {
 
 		Connection con = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 
 		con = Conexao.getConnection();
 		try {
@@ -206,9 +220,11 @@ public class ContaDao {
 			int linhasAtualizadas = stmt.executeUpdate();
 
 			if (linhasAtualizadas == 0) {
-				JOptionPane.showMessageDialog(null, "Conta não inativada", "Atenção", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Conta não inativada",
+						"Atenção", JOptionPane.ERROR_MESSAGE);
 			} else {
-				JOptionPane.showMessageDialog(null, "Conta inativada com sucesso!");
+				JOptionPane.showMessageDialog(null,
+						"Conta inativada com sucesso!");
 			}
 
 		} catch (SQLException e) {
@@ -217,6 +233,56 @@ public class ContaDao {
 			Conexao.close(null, stmt, con);
 		}
 
+	}
+
+/*	public void insertMovimentacao(MovimentacaoDados movimentacoesDados) {
+
+		try {
+			con = Conexao.getConnection();
+			stmt = con.prepareStatement(SQL_INSERT_MOVIMENTAO,
+					Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, movimentacoesDados.getOperacao());
+			stmt.setTimestamp(2,
+					new Timestamp(movimentacoesDados.getData().getTime()));
+			stmt.setBigDecimal(3, movimentacoesDados.getValor());
+			stmt.execute();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Conexao.close(null, stmt, con);
+
+		}
+
+	}
+*/
+	public List<MovimentacaoDados> buscarMovimentacoes() {
+
+		List<MovimentacaoDados> movimentacoes = new ArrayList<>();
+
+		try {
+			con = Conexao.getConnection();
+			stmt = con.prepareStatement(SQL_SELECT_ALL_MOVIMENTACAO);
+
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+
+				MovimentacaoDados movimentacao = new MovimentacaoDados();
+				movimentacao.setData(rs.getTimestamp("data"));
+				movimentacao.setOperacao(rs.getString("operacao"));
+				movimentacao.setValor(rs.getBigDecimal("valor"));
+				movimentacao.setId(rs.getInt("id"));
+				movimentacoes.add(movimentacao);
+			}
+			return movimentacoes;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Conexao.close(rs, stmt, con);
+		}
+
+		return movimentacoes;
 	}
 
 }

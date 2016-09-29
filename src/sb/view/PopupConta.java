@@ -28,11 +28,13 @@ import java.awt.Font;
 
 public class PopupConta extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtAgencia;
 	private JTextField txtConta;
 	private JTextField txtTitular;
 
+	@SuppressWarnings("unchecked")
 	public PopupConta() {
 		setTitle("Popup Conta");
 		setResizable(false);
@@ -109,6 +111,7 @@ public class PopupConta extends JFrame {
 		gbc_lblTipoConta.gridy = 3;
 		panel.add(lblTipoConta, gbc_lblTipoConta);
 
+		@SuppressWarnings("rawtypes")
 		final JComboBox cmbTipoConta = new JComboBox(
 				sb.classificacoes.TipoConta.values());
 		cmbTipoConta.setForeground(Color.BLACK);
@@ -142,20 +145,21 @@ public class PopupConta extends JFrame {
 		JButton btnSelecaoConta = new JButton("Selecionar Conta");
 		btnSelecaoConta.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnSelecaoConta.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {
 
-			String agencia = txtAgencia.getText().replace("-", "");
-			String numeroConta = txtConta.getText().replace("-", "");
-			String tipoConta = cmbTipoConta.getSelectedItem().toString();
-			String titular = txtTitular.getText().trim();
+				String agencia = txtAgencia.getText().replace("-", "");
+				String numeroConta = txtConta.getText().replace("-", "");
+				String tipoConta = cmbTipoConta.getSelectedItem().toString();
+				String titular = txtTitular.getText().trim();
 
-			Conta conta = new ContaController().contaBancario(agencia,
+				Conta conta = new ContaController().contaBancario(agencia,
 						numeroConta, tipoConta, titular);
-			if (conta != null) {
-			new MainCliente(conta).setVisible(true);
-			}else{
-				JOptionPane.showMessageDialog(null, "Erro na selecao da conta!");
-			}
+				if (conta != null) {
+					new MainCliente(conta).setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Erro na selecao da conta!");
+				}
 			}
 		});
 		btnSelecaoConta.setForeground(Color.BLACK);

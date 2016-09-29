@@ -2,9 +2,6 @@ package sb.model;
 
 import java.math.BigDecimal;
 
-import sb.classificacoes.TipoConta;
-
-
 public class Conta {
 
 	private Integer id;

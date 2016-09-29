@@ -36,9 +36,6 @@ public class Logar extends JFrame {
 	private JComboBox cbmAcesso;
 	private JLabel lblNomeBanco;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,9 +50,6 @@ public class Logar extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Logar() {
 		setResizable(false);
 		setTitle("Banking For All!!!");
@@ -140,7 +134,6 @@ public class Logar extends JFrame {
 		txtLogin.setText("");
 		txtSenha.setText("");
 		cbmAcesso.setSelectedIndex(0);
-
 	}
 
 	protected void acessoBankingForAll() {
@@ -150,22 +143,20 @@ public class Logar extends JFrame {
 		String senha = txtSenha.getText().trim();
 		ClassificacaoUsuario tipoUsuario = (ClassificacaoUsuario) cbmAcesso.getSelectedItem();
 
-		boolean acessa = usuarioController.acessoLogin(usuario, senha, tipoUsuario);
+		boolean logar = usuarioController.acessoLogin(usuario, senha, tipoUsuario);
 
-		if (acessa && tipoUsuario == ClassificacaoUsuario.BANCARIO) {
+		if (logar && tipoUsuario == ClassificacaoUsuario.BANCARIO) {
 
-			MainBancario telaBanc = new MainBancario();
-			telaBanc.setVisible(true);
+			MainBancario main = new MainBancario();
+			main.setVisible(true);
 			setVisible(false);
 
-		} else if (acessa && tipoUsuario == ClassificacaoUsuario.CLIENTE) {
+		} else if (logar && tipoUsuario == ClassificacaoUsuario.CLIENTE) {
 			Conta conta = new ContaController().get(usuario, senha);
-			// Conta conta = new Conta();
-			MainCliente telaCliente = new MainCliente(conta);
+			MainCliente mainCliente = new MainCliente(conta);
 			JOptionPane.showMessageDialog(Logar.this, "Bem vindo ao sistema do Banking For All!!!");
-			telaCliente.setVisible(true);
+			mainCliente.setVisible(true);
 			setVisible(false);
-
 		} else {
 			JOptionPane.showMessageDialog(Logar.this, "Dados incorretos, tente novamente!!!");
 			limpaCampos();

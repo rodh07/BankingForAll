@@ -3,6 +3,7 @@ package abstractFactoryInfo;
 import java.text.NumberFormat;
 
 import sb.classificacoes.TipoOperacao;
+import sb.model.Conta;
 import sb.view.ConfirmacaoOperacao;
 
 public class Informacoes {
@@ -15,4 +16,5 @@ public class Informacoes {
 		lblValor.setText(NumberFormat.getCurrencyInstance().format(vlrOperacao));
 	}
 	*/
+
 }

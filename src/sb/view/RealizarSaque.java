@@ -12,10 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
+
 import sb.view.CabecalhoCliente;
 import sb.classificacoes.TipoOperacao;
 import sb.view.Teclado;
 import sb.model.Conta;
+import sb.model.Movimentacao;
+
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -24,10 +27,9 @@ import java.awt.event.ActionEvent;
 public class RealizarSaque extends CabecalhoCliente {
 	
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	private JTextField txtValor;
 
-	public RealizarSaque(final Conta conta) {
+	public RealizarSaque(final Conta conta, final Movimentacao movimentacao) {
 		super(conta);
 		setTitle("Saque");
 		setResizable(false);
@@ -57,8 +59,8 @@ public class RealizarSaque extends CabecalhoCliente {
 		btnValor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Teclado teclado = new Teclado(conta, new BigDecimal(50.00),
-						null, TipoOperacao.SAQUE, null);
+				Teclado teclado = new Teclado(conta, new BigDecimal(50.00), null, TipoOperacao.SAQUE, null,
+						movimentacao);
 				teclado.setVisible(true);
 			}
 		});
@@ -74,7 +76,7 @@ public class RealizarSaque extends CabecalhoCliente {
 			public void actionPerformed(ActionEvent e) {
 
 				Teclado teclado = new Teclado(conta, new BigDecimal(100.00),
-						null, TipoOperacao.SAQUE, null);
+						null, TipoOperacao.SAQUE, null, movimentacao);
 				teclado.setVisible(true);
 			}
 		});
@@ -91,7 +93,7 @@ public class RealizarSaque extends CabecalhoCliente {
 			public void actionPerformed(ActionEvent e) {
 
 				Teclado teclado = new Teclado(conta, new BigDecimal(200.00),
-						null, TipoOperacao.SAQUE, null);
+						null, TipoOperacao.SAQUE, null, movimentacao);
 				teclado.setVisible(true);
 			}
 		});
@@ -107,7 +109,7 @@ public class RealizarSaque extends CabecalhoCliente {
 			public void actionPerformed(ActionEvent e) {
 
 				Teclado teclado = new Teclado(conta, new BigDecimal(300.00),
-						null, TipoOperacao.SAQUE, null);
+						null, TipoOperacao.SAQUE, null, movimentacao);
 				teclado.setVisible(true);
 			}
 		});
@@ -123,7 +125,7 @@ public class RealizarSaque extends CabecalhoCliente {
 			public void actionPerformed(ActionEvent e) {
 
 				Teclado teclado = new Teclado(conta, new BigDecimal(500.00),
-						null, TipoOperacao.SAQUE, null);
+						null, TipoOperacao.SAQUE, null, movimentacao);
 				teclado.setVisible(true);
 			}
 		});
@@ -172,7 +174,7 @@ public class RealizarSaque extends CabecalhoCliente {
 				} else {
 					new Teclado(conta, new BigDecimal(txtValor.getText()
 							.replace(".", "").replace(",", ".").toString()),
-							null, TipoOperacao.SAQUE, null).setVisible(true);
+							null, TipoOperacao.SAQUE, null, movimentacao).setVisible(true);
 				}
 			}
 		});

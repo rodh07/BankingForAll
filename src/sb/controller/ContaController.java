@@ -9,6 +9,7 @@ import sb.model.Command;
 import sb.model.Conta;
 import sb.model.Funcionalidades;
 import sb.model.Movimentacao;
+import sb.model.MovimentacaoDados;
 import sb.model.Sha256;
 import sb.model.Usuario;
 import sb.dao.AgenciaDao;
@@ -66,6 +67,13 @@ public class ContaController implements Funcionalidades {
 		return new ContaDao().getConta(agencia, numero, titular);
 	}
 
+	public List<MovimentacaoDados> buscarMovimentacao() {
+
+		
+		return new ContaDao().buscarMovimentacoes();
+	}
+
+	
 	@Override
 	public void deposito(Conta conta, BigDecimal valorDeposito) {
 

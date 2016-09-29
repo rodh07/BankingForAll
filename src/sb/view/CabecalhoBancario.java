@@ -8,16 +8,12 @@ import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
 //import sb.model.HorarioCorreto;
 
@@ -25,24 +21,14 @@ import java.awt.Color;
 
 public class CabecalhoBancario extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	protected JLabel lblDataHoraAtual;
-
-	public JLabel getLblDataAcess() {
-		return lblDataHoraAtual;
-	}
-
-	protected void setLblDataAcess(String lblDataAcess) {
-		this.lblDataHoraAtual.setText(lblDataAcess);
-	}
+	protected JLabel lblData;
 
 	public CabecalhoBancario() {
 		setSize(553, 310);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("./Icones/Play256x256.png"));
+		setIconImage(Toolkit.getDefaultToolkit().
+				getImage("./Icones/Play256x256.png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 370);
 		contentPane = new JPanel();
@@ -82,21 +68,20 @@ public class CabecalhoBancario extends JFrame {
 		gbc_lblNomeBanco.gridy = 0;
 		cabecalho.add(lblNomeBanco, gbc_lblNomeBanco);
 
-		lblDataHoraAtual = new JLabel("");
-		lblDataHoraAtual.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		lblDataHoraAtual.setForeground(Color.BLACK);
-		lblDataHoraAtual.setText(HorarioCorreto());
+		lblData = new JLabel("");
+		lblData.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		lblData.setForeground(Color.BLACK);
+		lblData.setText(HorarioCorreto());
 		GridBagConstraints gbc_lblDataHoraAtual = new GridBagConstraints();
 		gbc_lblDataHoraAtual.anchor = GridBagConstraints.EAST;
 		gbc_lblDataHoraAtual.fill = GridBagConstraints.VERTICAL;
 		gbc_lblDataHoraAtual.insets = new Insets(0, 0, 5, 0);
 		gbc_lblDataHoraAtual.gridx = 2;
 		gbc_lblDataHoraAtual.gridy = 0;
-		cabecalho.add(lblDataHoraAtual, gbc_lblDataHoraAtual);
+		cabecalho.add(lblData, gbc_lblDataHoraAtual);
 
 		JLabel imagem = new JLabel("");
-		imagem.setIcon(new ImageIcon("E:\\workspace\\TrabBancoCentral\\Imagens\\Icone.png"));
-
+		imagem.setIcon(new ImageIcon("./Icones/Play256x256.png"));
 		GridBagConstraints gbc_imagem = new GridBagConstraints();
 		gbc_imagem.gridheight = 3;
 		gbc_imagem.insets = new Insets(0, 0, 0, 5);
@@ -114,11 +99,18 @@ public class CabecalhoBancario extends JFrame {
 		gbc_lblFrase.gridy = 2;
 		cabecalho.add(lblFrase, gbc_lblFrase);
 	}
+	
+	public JLabel getLblData() {
+		return lblData;
+	}
 
+	protected void setLblData(String lblData) {
+		this.lblData.setText(lblData);
+	}
+	
 	public String HorarioCorreto(){
-		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Calendar calendario = Calendar.getInstance();
-		
-		return dataFormatada.format(calendario.getTime());
+		return dateFormat.format(calendario.getTime());
 	}
 }

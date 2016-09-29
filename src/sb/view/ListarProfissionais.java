@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import sb.controller.ProfissionalController;
-import sb.model.ListaProfissionalModel;
+import sb.model.ListaProfissionalM;
 import sb.model.Profissional;
 
 
@@ -26,7 +26,7 @@ public class ListarProfissionais extends CabecalhoBancario implements WindowList
 	private JPanel contentPane;
 	private JTable tblProfissionais;
 	private List<Profissional> profissionais;
-	private ListaProfissionalModel model;
+	private ListaProfissionalM model;
 
 	public ListarProfissionais() {
 		super();
@@ -66,7 +66,7 @@ public class ListarProfissionais extends CabecalhoBancario implements WindowList
 				} else {
 					final Integer rowIndex = tblProfissionais.convertRowIndexToModel(rowSelected);
 					final Integer idProfissinal = (Integer) tblProfissionais.getModel().getValueAt(rowIndex, -1);
-					new CadastroProfissional(idProfissinal).setVisible(true);
+					new CadastrarProfissional(idProfissinal).setVisible(true);
 				}
 
 			}
@@ -81,7 +81,7 @@ public class ListarProfissionais extends CabecalhoBancario implements WindowList
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				new CadastroProfissional(null).setVisible(true);
+				new CadastrarProfissional(null).setVisible(true);
 
 			}
 		});
@@ -94,7 +94,7 @@ public class ListarProfissionais extends CabecalhoBancario implements WindowList
 
 	private void preencheTela() {
 		profissionais = new ProfissionalController().buscarProfissionais();
-		model = new ListaProfissionalModel(profissionais);
+		model = new ListaProfissionalM(profissionais);
 		tblProfissionais.setModel(model);
 	}
 
